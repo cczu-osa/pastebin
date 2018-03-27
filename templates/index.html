@@ -3,8 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
+    {% autoescape false %}
+    {{ state }}
+    {% endautoescape %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="./static/pastebin.css">
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="/static/pastebin.css">
     <title>Ubuntu Pastebin</title>
 </head>
 
@@ -19,7 +23,7 @@
 <form action="/" method="POST" id="pasteform" name="pasteform">
   <table>
     <tr>
-      <td colspan="2">网站提供粘贴代码服务，请勿滥用</td>
+      <td colspan="2">You can write some attention here.</td>
     </tr>
 <tr><th><label for="id_syntax">Syntax:</label></th><td><select name="syntax" id="id_syntax">
 <option value="text">Plain Text</option>
@@ -220,6 +224,7 @@
 <option value="xslt">XSLT</option>
 <option value="yaml">YAML</option>
 </select></td></tr>
+
 <tr><th><label for="id_content">Content:</label></th><td><textarea id="id_content" rows="20" cols="80" name="content"></textarea></td></tr>
     <tr> 
       <th>&nbsp;</th> 
@@ -234,5 +239,4 @@
 	    </div>
 	</div>
 </body>
-
 </html>
