@@ -9,6 +9,7 @@ import string
 import random
 import time
 import sys
+import shutil
 
 app = Flask(__name__)
 
@@ -89,6 +90,12 @@ def all():
     except BaseException as e:
         print(str(e))
         return send_file(error_file_path)
+
+@app.route('/clean')
+def clean():
+    shutil.rmtree(paste_path)
+    os.mkdir(paste_path)
+    return render_template('index.html', state='')
 
 # err no such file
 @app.errorhandler(404)
