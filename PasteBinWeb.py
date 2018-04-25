@@ -18,7 +18,10 @@ if(sys.path[0]==os.getcwd()):
     p = sys.path[0]
 else:
     p = sys.path[1]
-paste_path = os.path.join(p, 'pastefile')
+try:
+    os.mkdir(paste_path)
+except BaseException as e:
+    print(str(e))
 error_file_path = os.path.join(p, 'static', 'error.html')
 # templates does not need absolute path.
 # index_file_path = os.path.join(p, 'templates', 'index.html')
