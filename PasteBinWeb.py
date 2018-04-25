@@ -77,8 +77,9 @@ def all():
         files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
         for file in files:
             file_path = os.path.join(paste_path, file)
-            print(file_path+time.ctime(os.stat(file_path).st_ctime))
+            #print(file_path+time.ctime(os.stat(file_path).st_ctime))
             path = os.path.splitext(file)[0][0:]
+            file_name = os.path.basename(file_path)
             time_stamp = time.ctime(os.stat(file_path).st_ctime)
             #date = time_stamp
             code_source = ''
@@ -89,7 +90,7 @@ def all():
             lang = get_lexer_by_name(language)
             formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
             code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
-            posts.append(dict(url=path, dat=time_stamp,content=code))
+            posts.append(dict(url=file_name, dat=time_stamp,content=code))
             #print(os.path.splitext(file)[0][1:])
             #list.append()
             #list.append()
