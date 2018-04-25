@@ -6,6 +6,7 @@ run PasteBinWeb.py to run
 
 Use https://paste.ubuntu.com/ as sample.
 
+Demo http:pan.cczu.org:5000
 
 ## Run in Docker
 ```bash
