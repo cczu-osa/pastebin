@@ -13,7 +13,7 @@ import sys
 app = Flask(__name__)
 
 # 获取工作目录路径
-p = sys.path[0]
+p = sys.path[1]
 paste_path = os.path.join(p, 'pastefile')
 error_file_path = os.path.join(p, 'static', 'error.html')
 # templates does not need absolute path.
