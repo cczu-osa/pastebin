@@ -14,7 +14,10 @@ import shutil
 app = Flask(__name__)
 
 # 获取工作目录路径
-p = sys.path[0]
+if(sys.path[0]==os.getcwd()):
+    p = sys.path[0]
+else:
+    p = sys.path[1]
 paste_path = os.path.join(p, 'pastefile')
 error_file_path = os.path.join(p, 'static', 'error.html')
 # templates does not need absolute path.
@@ -109,6 +112,6 @@ def page_not_found(error):
 
 # entry of programme
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=80)
     # debug=True
     # host='0.0.0.0', port=81,
