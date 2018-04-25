@@ -62,30 +62,6 @@ def num(stamp):
     except IOError:
         return send_file(error_file_path)
 
-@app.route('/all')
-def all():
-    try:
-        posts=[]
-
-        for file in os.listdir(paste_path):
-            file_path = os.path.join(paste_path, file)
-            path = os.path.splitext(file)[0][0:]
-            time_stamp = time.gmtime(os.path.getatime(file_path))
-            date = time.strftime("%Y-%m-%d %H:%M:%S", time_stamp)
-
-            code_source = open(file_path).read()
-            language = os.path.splitext(file)[1][1:]
-            lang = get_lexer_by_name(language)
-            formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
-            code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
-            posts.append(dict(url=path, dat=date,content=code))
-            #print(os.path.splitext(file)[0][1:])
-            #list.append()
-            #list.append()
-        return render_template('all.html',data=posts)
-    except BaseException as e:
-        print(str(e))
-        return send_file(error_file_path)
 
 # err no such file
 @app.errorhandler(404)
@@ -95,6 +71,6 @@ def page_not_found(error):
 
 # entry of programme
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
     # debug=True
     # host='0.0.0.0', port=81,
