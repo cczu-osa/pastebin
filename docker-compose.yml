@@ -1,7 +1,0 @@
-web:
-    build: .
-    command: python -u PasteBinWeb.py
-    ports:
-        - "5000:5000"
-    volumes:
-        - .:/flask_compose

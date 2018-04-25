@@ -1,3 +1,0 @@
-Pygments
-Jinja2
-Flask
