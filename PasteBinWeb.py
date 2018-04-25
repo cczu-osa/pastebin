@@ -18,6 +18,7 @@ if(sys.path[0]==os.getcwd()):
     p = sys.path[0]
 else:
     p = sys.path[1]
+paste_path = os.path.join(p, 'pastefile')
 try:
     os.mkdir(paste_path)
 except BaseException as e:
