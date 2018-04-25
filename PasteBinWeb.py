@@ -68,9 +68,13 @@ def num(stamp):
 def all():
     try:
         posts=[]
-
-        for file in os.listdir(paste_path):
+        os.chdir(paste_path)
+        files = filter(os.path.isfile, os.listdir(paste_path))
+        files = [os.path.join(paste_path, f) for f in files]
+        files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+        for file in files:
             file_path = os.path.join(paste_path, file)
+            print(file_path+time.ctime(os.stat(file_path).st_ctime))
             path = os.path.splitext(file)[0][0:]
             time_stamp = time.ctime(os.stat(file_path).st_ctime)
             #date = time_stamp
