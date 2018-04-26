@@ -6,11 +6,11 @@ run PasteBinWeb.py to run
 
 Use https://paste.ubuntu.com/ as sample.
 
-Demo http://pan.cczu.org:5000
+Demo http://paste.cczu.org
 
 ## Run in Docker
 ```bash
-sudo docker run --name pastebin -p 5000:5000 weicheng97/pastebin
+sudo docker run --name pastebin -p 80:80 weicheng97/pastebin
 ```
 
 ## Run in bash
