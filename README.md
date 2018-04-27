@@ -20,15 +20,11 @@ gunicorn -w 4 -b 0.0.0.0:80 PasteBinWeb:app
 ```
 
 ## Useage
-Just open it and enjoy pasting.
-### View all files
-visit http://yourdomain/all to find all files ordered by newest pasted time.
-### Use post method to paste
-Post to root URL and server receive two parameters [syntax,content], quite easy.
-'''
-language = request.form['syntax']
-content = request.form['content']
-'''
+Just open it and enjoy pasting.</br>
+### View all files</br>
+visit http://yourdomain/all to find all files ordered by newest pasted time.</br>
+### Use post method to paste</br>
+Post to root URL and server receive two parameters [syntax,content], quite easy.</br>
 ### Clean
-*DO NOT USE IT ON DEMO SERVER*
+*DO NOT USE IT ON DEMO SERVER*</br>
 visit http://yourdomain/clean to clean all files.
