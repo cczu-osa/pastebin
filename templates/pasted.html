@@ -8,20 +8,23 @@
     <title>Pastebin</title>
 </head>
 
-    <body>
-	<div id="outerColumnContainer" style="color: #000">
-	      <div id="contentColumn">
-		      <div class="inside">
-	    <h1>Pastebin</h1>
+<body>
+<div id="outerColumnContainer" style="color: #000">
+<div id="contentColumn">
+<div class="inside">
+<h1>Pastebin</h1>
 <h2>{{ name }}</h2>
 <div class="paste">
 <div class="paste">
+<a class="pturl" href="{% autoescape false %}{{ pasted }}{% endautoescape %}">Download as text</a>
 {% autoescape false %}
 {{ content }}
 {% endautoescape %}
+<a class="pturl" href="{% autoescape false %}{{ pasted }}{% endautoescape %}">Download as text</a>
 </div>
 </div>
 </div>
 </div>
 </div>
+</body>
 </html>

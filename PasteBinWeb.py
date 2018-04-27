@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect
+from flask import Flask, render_template, request, send_file, redirect, send_from_directory
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
@@ -56,6 +56,9 @@ def index():
 @app.route('/p/<stamp>')
 def num(stamp):
     try:
+        #not to show file extension
+        if (str(stamp).find('.') >= 0):
+            return send_file(error_file_path)
         for file in os.listdir(paste_path):
             if fnmatch.fnmatch(file, stamp + "*"):
                 file_path = os.path.join(paste_path, file)
@@ -67,10 +70,26 @@ def num(stamp):
                 lang = get_lexer_by_name(language)
                 formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
                 code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
-                return render_template('pasted.html', name='Pasted in ' + date, content=code)
+                paste_download='/d/'+str(os.path.basename(file_path))
+                return render_template('pasted.html', name='Pasted in ' + date, content=code, pasted=paste_download)
         return send_file(error_file_path)
     except IOError:
         return send_file(error_file_path)
+
+
+@app.route('/d/<stamp>')
+def download(stamp):
+    try:
+        if(str(stamp).find('.')==True):
+            return send_file(error_file_path)
+        for file in os.listdir(paste_path):
+            if fnmatch.fnmatch(file, stamp + "*"):
+                file_path = os.path.join(paste_path, file)
+                return send_from_directory(paste_path, os.path.basename(file_path), as_attachment=True)
+        return send_file(error_file_path)
+    except IOError:
+        return send_file(error_file_path)
+
 
 
 @app.route('/all')
@@ -84,19 +103,18 @@ def all():
         for file in files:
             file_path = os.path.join(paste_path, file)
             # print(file_path+time.ctime(os.stat(file_path).st_ctime))
-            path = os.path.splitext(file)[0][0:]
-            file_name = os.path.basename(file_path)
+            #path = os.path.splitext(file)[0][0:]
+            file_name = os.path.basename(file_path).split('.')
             time_stamp = time.ctime(os.stat(file_path).st_ctime)
             # date = time_stamp
             code_source = ''
             f = open(file_path)
             for i in range(10):
                 code_source = code_source + f.readline()
-            language = os.path.splitext(file)[1][1:]
-            lang = get_lexer_by_name(language)
+            lang = get_lexer_by_name(file_name[1])
             formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
             code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
-            posts.append(dict(url=file_name, dat=time_stamp, content=code))
+            posts.append(dict(url=file_name[0], dat=time_stamp, content=code))
             # print(os.path.splitext(file)[0][1:])
             # list.append()
             # list.append()
