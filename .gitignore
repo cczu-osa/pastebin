@@ -102,4 +102,5 @@ ENV/
 
 
 .cpp
+.xml
 postfile/
