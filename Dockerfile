@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.7-rc-alpine
 MAINTAINER Weicheng Jiang "williamjiang97@gmail.com"
 ADD . /flask_compose
 WORKDIR /flask_compose
