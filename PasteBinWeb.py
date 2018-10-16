@@ -9,9 +9,8 @@ import random
 import time
 import datetime
 from shutil import rmtree
-import DeleteToken
-import AttentionForServer
-import BaseService
+from Service import AttentionForServer
+from Service import BaseService, DeleteToken
 
 app = Flask(__name__)
 
@@ -19,11 +18,6 @@ app = Flask(__name__)
 p = BaseService.get_root_path()
 paste_path = os.path.join(p, 'pastefile')
 error_file_path = os.path.join(p, 'static', 'error.html')
-
-
-# templates does not need absolute path.
-# index_file_path = os.path.join(p, 'templates', 'index.html')
-# pasted_file_path = os.path.join(p, 'templates', 'pasted.html')
 
 
 @app.route('/')
@@ -122,9 +116,11 @@ def clean_all():
                 for file in os.listdir(paste_path):
                     if fnmatch.fnmatch(file, filename + "*"):
                         os.remove(os.path.join(paste_path, file))
-                        AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to delete " + file)
+                        AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to delete " + file +
+                                                      " at " + time.asctime(time.localtime(time.time())))
                         return file + " deleted!"
-            AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to clean all files")
+            AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to clean all files at " +
+                                          time.asctime(time.localtime(time.time())))
             rmtree(paste_path)
             os.mkdir(paste_path)
             return render_template('index.html', state='')

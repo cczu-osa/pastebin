@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f043297e-4faa-4f5a-be24-5fde87653b48" name="Default" comment="fix and updrade">
-      <change afterPath="$PROJECT_DIR$/AttentionForServer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BaseService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DeleteToken.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Service/AttentionForServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Service/BaseService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeleteToken.py" beforeDir="false" afterPath="$PROJECT_DIR$/Service/DeleteToken.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PasteBinWeb.py" beforeDir="false" afterPath="$PROJECT_DIR$/PasteBinWeb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pastefile/AttentionForServer.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pastefile/test.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +19,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/PasteBin$test.coverage" NAME="test Coverage Results" MODIFIED="1522157677308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PasteBin$SqlLite.coverage" NAME="SqlLite Coverage Results" MODIFIED="1539693107948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PasteBin$PasteBin.coverage" NAME="PasteBin Coverage Results" MODIFIED="1539698911817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PasteBin$PasteBin.coverage" NAME="PasteBin Coverage Results" MODIFIED="1539701939182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PasteBin$AttentionForServer.coverage" NAME="AttentionForServer Coverage Results" MODIFIED="1539697443657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -53,16 +53,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="13" />
-          <entry key="py" value="2715" />
+          <entry key="dummy" value="16" />
+          <entry key="gitignore" value="20" />
+          <entry key="py" value="3008" />
           <entry key="sql" value="17" />
-          <entry key="txt" value="16" />
+          <entry key="txt" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="29" />
-          <entry key="Python" value="2715" />
+          <entry key="PLAIN_TEXT" value="77" />
+          <entry key="Python" value="3008" />
           <entry key="Scratch" value="17" />
         </counts>
       </usages-collector>
@@ -70,9 +71,10 @@
         <counts>
           <entry key="Dockerfile" value="2" />
           <entry key="cpp" value="1" />
+          <entry key="gitignore" value="1" />
           <entry key="html" value="2" />
           <entry key="md" value="1" />
-          <entry key="py" value="12" />
+          <entry key="py" value="17" />
           <entry key="pyi" value="2" />
           <entry key="sql" value="1" />
           <entry key="txt" value="2" />
@@ -85,8 +87,8 @@
           <entry key="Dockerfile" value="2" />
           <entry key="HTML" value="2" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="12" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Python" value="17" />
           <entry key="PythonStub" value="2" />
           <entry key="Scratch" value="1" />
           <entry key="YAML" value="1" />
@@ -100,68 +102,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PasteBinWeb.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" selection-start-line="18" selection-end-line="19" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#91#0" expanded="true" />
-                <marker date="1539698911713" expanded="true" signature="5038:5569" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BaseService.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="41" lean-forward="true" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-                <marker date="1539698941014" expanded="true" signature="43:44" ph="..." />
-                <marker date="1539698941014" expanded="true" signature="331:332" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/1744770018/nt.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="814" column="41" lean-forward="true" selection-start-line="814" selection-start-column="41" selection-end-line="814" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AttentionForServer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DeleteToken.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-                <marker date="1539698911680" expanded="true" signature="84:85" ph="..." />
-                <marker date="1539698911680" expanded="true" signature="337:338" ph="..." />
-                <marker date="1539698911680" expanded="true" signature="370:916" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -194,10 +135,12 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e3c53e62-806c-4c03-aea7-ca6d677c253a/console.sql" />
         <option value="$PROJECT_DIR$/SqlLite.py" />
-        <option value="$PROJECT_DIR$/PasteBinWeb.py" />
         <option value="$PROJECT_DIR$/AttentionForServer.py" />
         <option value="$PROJECT_DIR$/DeleteToken.py" />
         <option value="$PROJECT_DIR$/BaseService.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Service/AttentionForServer.py" />
+        <option value="$PROJECT_DIR$/PasteBinWeb.py" />
       </list>
     </option>
   </component>
@@ -249,11 +192,13 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Weicheng\eclipse-workspace\Weicheng\PasteBin\templates" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Weicheng\eclipse-workspace\Weicheng\PasteBin\static" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Weicheng\PycharmProjects\PasteBin\Service" />
+      <recent name="C:\Users\Weicheng\PycharmProjects\PasteBin\pastefile" />
+      <recent name="C:\Users\Weicheng\eclipse-workspace\Weicheng\PasteBin\templates" />
       <recent name="C:\Users\Weicheng\eclipse-workspace\Weicheng\PasteBin\static" />
     </key>
   </component>
@@ -283,7 +228,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AttentionForServer.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Weicheng\PycharmProjects\PasteBin\pastefile\AttentionForServer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -327,7 +272,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\Weicheng\PycharmProjects\PasteBin\DeleteToken.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Weicheng\PycharmProjects\PasteBin\Service\DeleteToken.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -390,19 +335,32 @@
       <option name="project" value="LOCAL" />
       <updated>1539672915842</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Experiment V1.0">
+      <created>1539699082875</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1539699082875</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix and updrade">
+      <created>1539701477373</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1539701477373</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1450" height="878" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1450" height="878" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49932525" visible="true" weight="0.19683908" />
       <window_info id="Structure" order="1" sideWeight="0.5006748" side_tool="true" weight="0.18664752" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26308724" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23355705" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986577" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -455,6 +413,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Experiment V1.0" />
     <MESSAGE value="fix and updrade" />
     <option name="LAST_COMMIT_MESSAGE" value="fix and updrade" />
   </component>
@@ -604,48 +563,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AttentionForServer.py">
+    <entry file="file://$PROJECT_DIR$/pastefile/AttentionForServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DeleteToken.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="697">
+          <caret line="57" column="9" lean-forward="true" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Service/DeleteToken.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
           <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1539698911680" expanded="true" signature="84:85" ph="..." />
-            <marker date="1539698911680" expanded="true" signature="337:338" ph="..." />
-            <marker date="1539698911680" expanded="true" signature="370:916" ph="..." />
+            <marker date="1539701575928" expanded="true" signature="97:98" ph="..." />
+            <marker date="1539701575928" expanded="true" signature="350:351" ph="..." />
+            <marker date="1539701575928" expanded="true" signature="383:929" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Service/BaseService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1539699036091" expanded="true" signature="43:44" ph="..." />
+            <marker date="1539699036091" expanded="true" signature="331:332" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Service/AttentionForServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PasteBinWeb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" selection-start-line="18" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="65">
+          <caret line="54" column="54" lean-forward="true" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
           <folding>
             <element signature="e#0#91#0" expanded="true" />
-            <marker date="1539698911713" expanded="true" signature="5038:5569" ph="..." />
+            <marker date="1539701939158" expanded="true" signature="5517:6048" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BaseService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="41" lean-forward="true" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <marker date="1539698941014" expanded="true" signature="43:44" ph="..." />
-            <marker date="1539698941014" expanded="true" signature="331:332" ph="..." />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/Service/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

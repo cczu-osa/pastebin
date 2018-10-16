@@ -1,6 +1,6 @@
 import sqlite3
 
-import BaseService
+from Service import BaseService
 
 db_path = BaseService.get_db_path()
 
