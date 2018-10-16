@@ -54,10 +54,10 @@ def index():
 
 # load pasted file
 @app.route('/p/<stamp>')
-def num(stamp):
+def pasted_file(stamp):
     try:
-        #not to show file extension
-        if (str(stamp).find('.') >= 0):
+        # not to show file extension
+        if str(stamp).find('.') >= 0:
             return send_file(error_file_path)
         for file in os.listdir(paste_path):
             if fnmatch.fnmatch(file, stamp + "*"):
@@ -70,7 +70,7 @@ def num(stamp):
                 lang = get_lexer_by_name(language)
                 formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
                 code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
-                paste_download='/d/'+str(os.path.basename(file_path))
+                paste_download = '/d/' + str(os.path.basename(file_path))
                 return render_template('pasted.html', name='Pasted in ' + date, content=code, pasted=paste_download)
         return send_file(error_file_path)
     except IOError:
@@ -78,9 +78,9 @@ def num(stamp):
 
 
 @app.route('/d/<stamp>')
-def download(stamp):
+def download_file(stamp):
     try:
-        if(str(stamp).find('.')==True):
+        if str(stamp).find('.'):
             return send_file(error_file_path)
         for file in os.listdir(paste_path):
             if fnmatch.fnmatch(file, stamp + "*"):
@@ -91,9 +91,8 @@ def download(stamp):
         return send_file(error_file_path)
 
 
-
 @app.route('/all')
-def all():
+def show_all():
     try:
         posts = []
         os.chdir(paste_path)
@@ -103,7 +102,7 @@ def all():
         for file in files:
             file_path = os.path.join(paste_path, file)
             # print(file_path+time.ctime(os.stat(file_path).st_ctime))
-            #path = os.path.splitext(file)[0][0:]
+            # path = os.path.splitext(file)[0][0:]
             file_name = os.path.basename(file_path).split('.')
             time_stamp = time.ctime(os.stat(file_path).st_ctime)
             # date = time_stamp
@@ -125,7 +124,7 @@ def all():
 
 
 @app.route('/clean')
-def clean():
+def clean_all():
     shutil.rmtree(paste_path)
     os.mkdir(paste_path)
     return render_template('index.html', state='')
