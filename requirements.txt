@@ -1,3 +1,4 @@
+requests
 Pygments
 Jinja2
 Flask

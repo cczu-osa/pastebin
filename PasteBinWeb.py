@@ -7,21 +7,16 @@ import fnmatch
 import string
 import random
 import time
-import sys
-import shutil
-
+import datetime
+from shutil import rmtree
+import DeleteToken
+import AttentionForServer
+import BaseService
 app = Flask(__name__)
 
 # 获取工作目录路径
-if (sys.path[0] == os.getcwd()):
-    p = sys.path[0]
-else:
-    p = sys.path[1]
+p = BaseService.get_root_path()
 paste_path = os.path.join(p, 'pastefile')
-try:
-    os.mkdir(paste_path)
-except BaseException as e:
-    print("粘贴文件夹已创建")
 error_file_path = os.path.join(p, 'static', 'error.html')
 
 
@@ -43,7 +38,6 @@ def index():
     if language and content:
         uuid = ''.join([random.choice(string.ascii_letters + string.digits) for ch in range(8)])
         filename = uuid + '.' + language
-        # print(os.path.join(paste_path, filename))
         code_file = open(os.path.join(paste_path, filename), "w", newline='')
         code_file.write(content)
         code_file.close()
@@ -66,7 +60,6 @@ def pasted_file(stamp):
                 language = os.path.splitext(file)[1][1:]
                 time_stamp = time.ctime(os.stat(file_path).st_ctime)
                 date = time_stamp
-                # date = time.strftime("%Y-%m-%d %H:%M:%S", time_stamp)
                 lang = get_lexer_by_name(language)
                 formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
                 code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
@@ -101,11 +94,8 @@ def show_all():
         files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
         for file in files:
             file_path = os.path.join(paste_path, file)
-            # print(file_path+time.ctime(os.stat(file_path).st_ctime))
-            # path = os.path.splitext(file)[0][0:]
             file_name = os.path.basename(file_path).split('.')
-            time_stamp = time.ctime(os.stat(file_path).st_ctime)
-            # date = time_stamp
+            time_stamp = time.ctime(os.stat(file_path).st_ctime + datetime.timedelta(hours=8))
             code_source = ''
             f = open(file_path)
             for i in range(10):
@@ -114,9 +104,6 @@ def show_all():
             formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
             code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
             posts.append(dict(url=file_name[0], dat=time_stamp, content=code))
-            # print(os.path.splitext(file)[0][1:])
-            # list.append()
-            # list.append()
         return render_template('all.html', data=posts)
     except BaseException as e:
         print(str(e))
@@ -125,9 +112,18 @@ def show_all():
 
 @app.route('/clean')
 def clean_all():
-    shutil.rmtree(paste_path)
-    os.mkdir(paste_path)
-    return render_template('index.html', state='')
+    try:
+        token = request.values.get("token")
+        app.logger.info("ip:" + request.remote_addr + "use token:" + token + " request to clean all files")
+        if DeleteToken.check_delete_token(token):
+            AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to clean all files")
+            rmtree(paste_path)
+            os.mkdir(paste_path)
+            return render_template('index.html', state='')
+        raise Exception('Auth not passed!')
+    except BaseException as e:
+        app.logger.error("ip:" + request.remote_addr + "use token:" + token + "auth fail! " + e)
+        return "Auth Fail"
 
 
 # err no such file
@@ -136,8 +132,28 @@ def page_not_found(error):
     return send_file(error_file_path), 404
 
 
+@app.route('/settoken')
+def setToken():
+    token = request.values.get("token")
+    push = request.values.get("pushapi")
+    push_set = False
+    if push is not None:
+        AttentionForServer.set_token(push)
+        push_set = True
+    if DeleteToken.set_delete_token(token):
+        if push_set:
+            return '''Set Success! Please Remember it Firmly!</br>
+            And you can use push Service now!
+            '''
+        return 'Set Success! Please Remember it Firmly!'
+    if push_set:
+        return "You can use push Service now!"
+    return 'Fail!'
+
+
 # entry of programme
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    DeleteToken.init()
+    app.run(host='0.0.0.0', port=80, debug=True)
     # debug=True
     # host='0.0.0.0', port=81,
