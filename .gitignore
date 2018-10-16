@@ -104,3 +104,6 @@ ENV/
 .cpp
 .xml
 postfile/
+
+.idea/
+pastebin.db

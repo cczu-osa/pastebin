@@ -12,6 +12,7 @@ from shutil import rmtree
 import DeleteToken
 import AttentionForServer
 import BaseService
+
 app = Flask(__name__)
 
 # 获取工作目录路径
@@ -116,14 +117,21 @@ def clean_all():
         token = request.values.get("token")
         app.logger.info("ip:" + request.remote_addr + "use token:" + token + " request to clean all files")
         if DeleteToken.check_delete_token(token):
+            filename = request.values.get("filename")
+            if filename is not None:
+                for file in os.listdir(paste_path):
+                    if fnmatch.fnmatch(file, filename + "*"):
+                        os.remove(os.path.join(paste_path, file))
+                        AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to delete " + file)
+                        return file + " deleted!"
             AttentionForServer.send_alart("ip:" + request.remote_addr + "</br>request to clean all files")
             rmtree(paste_path)
             os.mkdir(paste_path)
             return render_template('index.html', state='')
-        raise Exception('Auth not passed!')
-    except BaseException as e:
-        app.logger.error("ip:" + request.remote_addr + "use token:" + token + "auth fail! " + e)
+        app.logger.error("ip:" + request.remote_addr + "use token:" + token + " auth fail! ")
         return "Auth Fail"
+    except BaseException:
+        return render_template('index.html', state='')
 
 
 # err no such file
@@ -133,7 +141,7 @@ def page_not_found(error):
 
 
 @app.route('/settoken')
-def setToken():
+def set_token():
     token = request.values.get("token")
     push = request.values.get("pushapi")
     push_set = False
@@ -154,6 +162,6 @@ def setToken():
 # entry of programme
 if __name__ == '__main__':
     DeleteToken.init()
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80)
     # debug=True
     # host='0.0.0.0', port=81,
