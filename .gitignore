@@ -100,10 +100,9 @@ ENV/
 # mypy
 .mypy_cache/
 
-
-.cpp
-.xml
-postfile/
-
+# ide
 .idea/
+
+# runtime temporary files
+pastefile/
 pastebin.db

@@ -1,30 +1,46 @@
 # PasteBin
-An simple PasteBin Based on Python Flask
 
-Use pygments to generate html code and use Flask as background.
-run PasteBinWeb.py to run
+An simple PasteBin uses pygments to generate html and Flask as background.
 
-Use https://paste.ubuntu.com/ as sample.
+Demo https://paste.cczu.org
 
-Demo http://paste.cczu.org
+## Run
 
-## Run in Docker
-```bash
+### With Docker
+
+```sh
 sudo docker run --name pastebin -p 80:80 weicheng97/pastebin
 ```
 
-## Run in bash
+### Directly
+
 Do not try to just use app.run. Flask has serious problem on performance.
-```bash
+
+Requirements:
+* requests
+* Pygments
+* Jinja2
+* Flask
+* gunicorn
+
+```sh
 gunicorn -w 4 -b 0.0.0.0:80 PasteBinWeb:app
 ```
 
 ## Useage
-Just open it and enjoy pasting.</br>
-### View all files</br>
-visit http://yourdomain/all to find all files ordered by newest pasted time.</br>
-### Use post method to paste</br>
-Post to root URL and server receive two parameters [syntax,content], quite easy.</br>
+
+Just open it and enjoy pasting.
+
+### View all files
+
+visit http://yourdomain/all to find all files ordered by newest pasted time.
+
+### Use post method to paste
+
+Post to root URL and server receive two parameters [syntax,content], quite easy.
+
 ### Clean
-*DO NOT USE IT ON DEMO SERVER*</br>
+
+**DO NOT USE IT ON PRODUCTION ENVIRONMENT**
+
 visit http://yourdomain/clean to clean all files.
