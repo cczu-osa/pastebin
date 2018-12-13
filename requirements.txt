@@ -1,5 +1,0 @@
-requests
-Pygments
-Jinja2
-Flask
-gunicorn

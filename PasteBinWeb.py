@@ -58,7 +58,7 @@ def pasted_file(stamp):
                 lang = get_lexer_by_name(language)
                 formatter = HtmlFormatter(encoding='utf-8', style='emacs', linenos=True)
                 code = highlight(code_source, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
-                paste_download = '/d/' + str(os.path.basename(file_path))
+                paste_download = '/d/' + stamp
                 return render_template('pasted.html', name='Pasted in ' + date, content=code, pasted=paste_download)
         return send_file(error_file_path)
     except IOError:
@@ -68,12 +68,11 @@ def pasted_file(stamp):
 @app.route('/d/<stamp>')
 def download_file(stamp):
     try:
-        if str(stamp).find('.'):
+        if '.' in stamp:
             return send_file(error_file_path)
         for file in os.listdir(paste_path):
             if fnmatch.fnmatch(file, stamp + "*"):
-                file_path = os.path.join(paste_path, file)
-                return send_from_directory(paste_path, os.path.basename(file_path), as_attachment=True)
+                return send_from_directory(paste_path, file, as_attachment=True)
         return send_file(error_file_path)
     except IOError:
         return send_file(error_file_path)
