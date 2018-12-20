@@ -1,242 +1,110 @@
-﻿
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<!doctype html>
+<html lang="en">
 <head>
-    {% autoescape false %}
-    {{ state }}
-    {% endautoescape %}
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="/static/pastebin.css">
-    <title>Pastebin</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Hello, world!</title>
 </head>
-
-    <body>
-	<div id="outerColumnContainer" style="color: #000">
-	      <div id="contentColumn">
-		      <div class="inside">
-	    <h1>Pastebin</h1>
-	    
- 
-
-<form action="/" method="POST" id="pasteform" name="pasteform">
-  <table>
-    <tr>
-      <td colspan="2">An easy and light PasteBin By Flask.</td>
-    </tr>
-<tr><th><label for="id_syntax">Syntax:</label></th><td><select name="syntax" id="id_syntax">
-    <option value="cpp">C++</option>
-<option value="text">Plains Text</option>
-<option value="Cucumber">Gherkin</option>
-<option value="abap">ABAP</option>
-<option value="ada">Ada</option>
-<option value="ahk">autohotkey</option>
-<option value="antlr">ANTLR</option>
-<option value="antlr-as">ANTLR With ActionScript Target</option>
-<option value="antlr-cpp">ANTLR With CPP Target</option>
-<option value="antlr-csharp">ANTLR With C# Target</option>
-<option value="antlr-java">ANTLR With Java Target</option>
-<option value="antlr-objc">ANTLR With ObjectiveC Target</option>
-<option value="antlr-perl">ANTLR With Perl Target</option>
-<option value="antlr-python">ANTLR With Python Target</option>
-<option value="antlr-ruby">ANTLR With Ruby Target</option>
-<option value="apacheconf">ApacheConf</option>
-<option value="applescript">AppleScript</option>
-<option value="as">ActionScript</option>
-<option value="as3">ActionScript 3</option>
-<option value="aspx-cs">aspx-cs</option>
-<option value="aspx-vb">aspx-vb</option>
-<option value="asy">Asymptote</option>
-<option value="basemake">Makefile</option>
-<option value="bash">Bash</option>
-<option value="bat">Batchfile</option>
-<option value="bbcode">BBCode</option>
-<option value="befunge">Befunge</option>
-<option value="blitzmax">BlitzMax</option>
-<option value="boo">Boo</option>
-<option value="c">C</option>
-<option value="c-objdump">c-objdump</option>
-<option value="cfm">Coldfusion HTML</option>
-<option value="cfs">cfstatement</option>
-<option value="cheetah">Cheetah</option>
-<option value="clojure">Clojure</option>
-<option value="cmake">CMake</option>
-<option value="coffee-script">CoffeeScript</option>
-<option value="common-lisp">Common Lisp</option>
-<option value="console">Bash Session</option>
-<option value="control">Debian Control file</option>
-<option value="cpp-objdump">cpp-objdump</option>
-<option value="csharp">C#</option>
-<option value="css">CSS</option>
-<option value="css+django">CSS+Django/Jinja</option>
-<option value="css+erb">CSS+Ruby</option>
-<option value="css+genshitext">CSS+Genshi Text</option>
-<option value="css+mako">CSS+Mako</option>
-<option value="css+myghty">CSS+Myghty</option>
-<option value="css+php">CSS+PHP</option>
-<option value="css+smarty">CSS+Smarty</option>
-<option value="cython">Cython</option>
-<option value="d">D</option>
-<option value="d-objdump">d-objdump</option>
-<option value="delphi">Delphi</option>
-<option value="diff">Diff</option>
-<option value="django">Django/Jinja</option>
-<option value="dpatch">Darcs Patch</option>
-<option value="duel">Duel</option>
-<option value="dylan">Dylan</option>
-<option value="erb">ERB</option>
-<option value="erl">Erlang erl session</option>
-<option value="erlang">Erlang</option>
-<option value="evoque">Evoque</option>
-<option value="factor">Factor</option>
-<option value="felix">Felix</option>
-<option value="fortran">Fortran</option>
-<option value="gas">GAS</option>
-<option value="genshi">Genshi</option>
-<option value="genshitext">Genshi Text</option>
-<option value="glsl">GLSL</option>
-<option value="gnuplot">Gnuplot</option>
-<option value="go">Go</option>
-<option value="gooddata-cl">GoodData-CL</option>
-<option value="groff">Groff</option>
-<option value="haml">Haml</option>
-<option value="haskell">Haskell</option>
-<option value="html">HTML</option>
-<option value="html+cheetah">HTML+Cheetah</option>
-<option value="html+django">HTML+Django/Jinja</option>
-<option value="html+evoque">HTML+Evoque</option>
-<option value="html+genshi">HTML+Genshi</option>
-<option value="html+mako">HTML+Mako</option>
-<option value="html+myghty">HTML+Myghty</option>
-<option value="html+php">HTML+PHP</option>
-<option value="html+smarty">HTML+Smarty</option>
-<option value="html+velocity">HTML+Velocity</option>
-<option value="hx">haXe</option>
-<option value="hybris">Hybris</option>
-<option value="ini">INI</option>
-<option value="io">Io</option>
-<option value="ioke">Ioke</option>
-<option value="irc">IRC logs</option>
-<option value="jade">Jade</option>
-<option value="java">Java</option>
-<option value="js">JavaScript</option>
-<option value="js+cheetah">JavaScript+Cheetah</option>
-<option value="js+django">JavaScript+Django/Jinja</option>
-<option value="js+erb">JavaScript+Ruby</option>
-<option value="js+genshitext">JavaScript+Genshi Text</option>
-<option value="js+mako">JavaScript+Mako</option>
-<option value="js+myghty">JavaScript+Myghty</option>
-<option value="js+php">JavaScript+PHP</option>
-<option value="js+smarty">JavaScript+Smarty</option>
-<option value="jsp">Java Server Page</option>
-<option value="lhs">Literate Haskell</option>
-<option value="lighty">Lighttpd configuration file</option>
-<option value="llvm">LLVM</option>
-<option value="logtalk">Logtalk</option>
-<option value="lua">Lua</option>
-<option value="make">Makefile</option>
-<option value="mako">Mako</option>
-<option value="maql">MAQL</option>
-<option value="mason">Mason</option>
-<option value="matlab">Matlab</option>
-<option value="matlabsession">Matlab session</option>
-<option value="minid">MiniD</option>
-<option value="modelica">Modelica</option>
-<option value="modula2">Modula-2</option>
-<option value="moocode">MOOCode</option>
-<option value="mupad">MuPAD</option>
-<option value="mxml">MXML</option>
-<option value="myghty">Myghty</option>
-<option value="mysql">MySQL</option>
-<option value="nasm">NASM</option>
-<option value="newspeak">Newspeak</option>
-<option value="nginx">Nginx configuration file</option>
-<option value="numpy">NumPy</option>
-<option value="objdump">objdump</option>
-<option value="objective-c">Objective-C</option>
-<option value="objective-j">Objective-J</option>
-<option value="ocaml">OCaml</option>
-<option value="ooc">Ooc</option>
-<option value="perl">Perl</option>
-<option value="php">PHP</option>
-<option value="postscript">PostScript</option>
-<option value="pot">Gettext Catalog</option>
-<option value="pov">POVRay</option>
-<option value="prolog">Prolog</option>
-<option value="properties">Properties</option>
-<option value="protobuf">Protocol Buffer</option>
-<option value="py3tb">Python 3.0 Traceback</option>
-<option value="pycon">Python console session</option>
-<option value="pytb">Python Traceback</option>
-<option value="python">Python</option>
-<option value="python3">Python 3</option>
-<option value="ragel">Ragel</option>
-<option value="ragel-c">Ragel in C Host</option>
-<option value="ragel-cpp">Ragel in CPP Host</option>
-<option value="ragel-d">Ragel in D Host</option>
-<option value="ragel-em">Embedded Ragel</option>
-<option value="ragel-java">Ragel in Java Host</option>
-<option value="ragel-objc">Ragel in Objective C Host</option>
-<option value="ragel-ruby">Ragel in Ruby Host</option>
-<option value="raw">Raw token data</option>
-<option value="rb">Ruby</option>
-<option value="rbcon">Ruby irb session</option>
-<option value="rconsole">RConsole</option>
-<option value="rebol">REBOL</option>
-<option value="redcode">Redcode</option>
-<option value="rhtml">RHTML</option>
-<option value="rst">reStructuredText</option>
-<option value="sass">Sass</option>
-<option value="scala">Scala</option>
-<option value="scaml">Scaml</option>
-<option value="scheme">Scheme</option>
-<option value="scss">SCSS</option>
-<option value="smalltalk">Smalltalk</option>
-<option value="smarty">Smarty</option>
-<option value="sourceslist">Debian Sourcelist</option>
-<option value="splus">S</option>
-<option value="sql">SQL</option>
-<option value="sqlite3">sqlite3con</option>
-<option value="squidconf">SquidConf</option>
-<option value="ssp">Scalate Server Page</option>
-<option value="tcl">Tcl</option>
-<option value="tcsh">Tcsh</option>
-<option value="tex">TeX</option>
-<option value="text">Text only</option>
-<option value="trac-wiki">MoinMoin/Trac Wiki markup</option>
-<option value="v">verilog</option>
-<option value="vala">Vala</option>
-<option value="vb.net">VB.net</option>
-<option value="velocity">Velocity</option>
-<option value="vim">VimL</option>
-<option value="xml">XML</option>
-<option value="xml+cheetah">XML+Cheetah</option>
-<option value="xml+django">XML+Django/Jinja</option>
-<option value="xml+erb">XML+Ruby</option>
-<option value="xml+evoque">XML+Evoque</option>
-<option value="xml+mako">XML+Mako</option>
-<option value="xml+myghty">XML+Myghty</option>
-<option value="xml+php">XML+PHP</option>
-<option value="xml+smarty">XML+Smarty</option>
-<option value="xml+velocity">XML+Velocity</option>
-<option value="xquery">XQuery</option>
-<option value="xslt">XSLT</option>
-<option value="yaml">YAML</option>
-</select></td></tr>
-
-<tr><th><label for="id_content">Content:</label></th><td><textarea id="id_content" rows="20" cols="80" name="content"></textarea></td></tr>
-    <tr> 
-      <th>&nbsp;</th> 
-      <td> <input type="submit" value="Paste!" /> </td>
-    </tr>
-  </table>
-</form>
-
-
-
-		    </div>
-	    </div>
-	</div>
+<body>
+{% if show_alart %}
+    <div class="alert alert-danger" role="alert">
+        <p>{{ alart_msg }}</p>
+    </div>
+{% endif %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">PasteBin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/all">All Pasted Files <span class="sr-only"></span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form action="/" method="POST" id="pastefile" name="pasteform">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputPoster">Poster:</label>
+                        <input type="text" class="form-control" id="id_poster" name="poster"
+                               aria-describedby="posterHelp"
+                               placeholder="Max 30 characters, can be blank" maxlength="30">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputExpire">Expire:</label>
+                        <select id="id_expire" class="form-control" name="expire">
+                            <option value="0" selected="selected">None</option>
+                            <option value="60">1 hour</option>
+                            <option value="1440">1 day</option>
+                            <option value="10080">7 days</option>
+                            <option value="43200">30 days</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputSecret">Secret:</label>
+                        <select id="id_expire" class="form-control" name="secret">
+                            <option value="False" selected="selected">No, show it on list.</option>
+                            <option value="True">Yes, I want to keep it secret.</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputLanguage">Language:</label>
+                    <input type="text" class="typeahead form-control" data-provide="typeahead" id="id_language"
+                           name="syntax" placeholder="Plains Text" content="Plains Text">
+                    <small id="languageHelp" class="form-text text-muted">Nullable, default "Plains Text"</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputContent">Content:</label>
+                    <textarea class="form-control {% if content_empty %}is-invalid{% endif %}" id="id_content"
+                              name="content" rows="20" cols="80"></textarea>
+                    {% if content_empty %}
+                        <div class="invalid-feedback">
+                            Please Fill the Content!
+                        </div>{% endif %}
+                </div>
+                {#              TODO ADD FILEUPLOAD OPTION#}
+                {#                <div class="form-group">#}
+                {#                    <label for="exampleFormControlFile1">Or you can upload file to paste!</label>#}
+                {#                    <input type="file" class="form-control-file" id="id_upload" name="upload">#}
+                {#                </div>#}
+                <button type="submit" class="btn btn-primary">Paste!</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted"><strong>Copyright </strong><a href="https://github.com/cczu-osa">CCZU OSA</a> © 2018
+</span>
+    </div>
+</footer>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    $('.typeahead').typeahead({
+        source: ["Plains Text", "XML", "Python"]
+    });
+</script>
 </body>
 </html>
