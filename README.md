@@ -9,7 +9,7 @@ Demo https://paste.cczu.org
 ### With Docker
 
 ```sh
-sudo docker run --name pastebin -p 80:80 weicheng97/pastebin
+sudo docker run --restart=always --name pastebin -p 80:80 weicheng97/pastebin:2.0
 ```
 
 ### Directly
