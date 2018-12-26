@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/pastebin_new.css" rel="stylesheet">
+    <title>PasteBin - All pasted files</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">PasteBin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/all">All Pasted Files <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/static/about.html">About<span class="sr-only"></span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Supported languages</h2>
+            <ul>
+                <li>C++</li>
+                <li>Plains Text</li>
+                <li>aspx-cs</li>
+                <li>aspx-vb</li>
+                <li>Bash</li>
+                <li>Batchfile</li>
+                <li>C</li>
+                <li>CMake</li>
+                <li>C#</li>
+                <li>CSS</li>
+                <li>CSS+Django/Jinja</li>
+                <li>CSS+Ruby</li>
+                <li>CSS+Genshi Text</li>
+                <li>CSS+Mako</li>
+                <li>CSS+Myghty</li>
+                <li>CSS+PHP</li>
+                <li>CSS+Smarty</li>
+                <li>Cython</li>
+                <li>D</li>
+                <li>Delphi</li>
+                <li>Diff</li>
+                <li>Django/Jinja</li>
+                <li>Erlang</li>
+                <li>Fortran</li>
+                <li>Go</li>
+                <li>Haskell</li>
+                <li>HTML</li>
+                <li>HTML+Cheetah</li>
+                <li>HTML+Django/Jinja</li>
+                <li>HTML+Evoque</li>
+                <li>HTML+Genshi</li>
+                <li>HTML+Mako</li>
+                <li>HTML+Myghty</li>
+                <li>HTML+PHP</li>
+                <li>HTML+Smarty</li>
+                <li>HTML+Velocity</li>
+                <li>haXe</li>
+                <li>Hybris</li>
+                <li>Jade</li>
+                <li>Java</li>
+                <li>JavaScript</li>
+                <li>JavaScript+Cheetah</li>
+                <li>JavaScript+Django/Jinja</li>
+                <li>JavaScript+Ruby</li>
+                <li>JavaScript+Genshi Text</li>
+                <li>JavaScript+Mako</li>
+                <li>JavaScript+Myghty</li>
+                <li>JavaScript+PHP</li>
+                <li>JavaScript+Smarty</li>
+                <li>Java Server Page</li>
+                <li>Literate Haskell</li>
+                <li>Lighttpd configuration file</li>
+                <li>LLVM</li>
+                <li>Logtalk</li>
+                <li>Lua</li>
+                <li>Makefile</li>
+                <li>Mako</li>
+                <li>MAQL</li>
+                <li>Mason</li>
+                <li>Matlab</li>
+                <li>Matlab session</li>
+                <li>MiniD</li>
+                <li>Modelica</li>
+                <li>Modula-2</li>
+                <li>MOOCode</li>
+                <li>MuPAD</li>
+                <li>MXML</li>
+                <li>Myghty</li>
+                <li>MySQL</li>
+                <li>NASM</li>
+                <li>Newspeak</li>
+                <li>Nginx configuration file</li>
+                <li>NumPy</li>
+                <li>objdump</li>
+                <li>Objective-C</li>
+                <li>Objective-J</li>
+                <li>OCaml</li>
+                <li>Ooc</li>
+                <li>Perl</li>
+                <li>PHP</li>
+                <li>PostScript</li>
+                <li>Gettext Catalog</li>
+                <li>POVRay</li>
+                <li>Prolog</li>
+                <li>Properties</li>
+                <li>Python 3.0 Traceback</li>
+                <li>Python console session</li>
+                <li>Python Traceback</li>
+                <li>Python</li>
+                <li>Python 3</li>
+                <li>Ragel</li>
+                <li>Ragel in C Host</li>
+                <li>Ragel in CPP Host</li>
+                <li>Ragel in D Host</li>
+                <li>Embedded Ragel</li>
+                <li>Ragel in Java Host</li>
+                <li>Ragel in Objective C Host</li>
+                <li>Ragel in Ruby Host</li>
+                <li>Ruby</li>
+                <li>Ruby irb session</li>
+                <li>REBOL</li>
+                <li>Redcode</li>
+                <li>RHTML</li>
+                <li>reStructuredText</li>
+                <li>Sass</li>
+                <li>Scala</li>
+                <li>Scaml</li>
+                <li>Scheme</li>
+                <li>SCSS</li>
+                <li>SQL</li>
+                <li>sqlite3con</li>
+                <li>TeX</li>
+                <li>VB.net</li>
+                <li>XML</li>
+                <li>XML+Cheetah</li>
+                <li>XML+Django/Jinja</li>
+                <li>XML+Ruby</li>
+                <li>XML+Evoque</li>
+                <li>XML+Mako</li>
+                <li>XML+Myghty</li>
+                <li>XML+PHP</li>
+                <li>XML+Smarty</li>
+                <li>XML+Velocity</li>
+                <li>XQuery</li>
+                <li>XSLT</li>
+                <li>YAML</li>
+            </ul>
+            building now
+        </div>
+    </div>
+    <br>
+    <footer class="footer">
+        <div class="container">
+        <span class="text-muted"><strong>Copyright </strong><a href="https://github.com/cczu-osa">CCZU OSA</a> © 2018
+</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript">
+        $('.typeahead').typeahead({
+            source: ["Plains Text", "XML", "Python"]
+        });
+    </script>
+</body>
+</html>

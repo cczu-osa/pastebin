@@ -1,13 +1,10 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="../static/pastebin_new.css" rel="stylesheet">
     <title>Pasted File</title>
 </head>
 <body>
@@ -28,6 +25,9 @@
             <li class="nav-item  active">
                 <a class="nav-link" href="#">Pasted File<span class="sr-only"></span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/static/about.html">About<span class="sr-only"></span></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -35,21 +35,28 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>{{ name }}</h2>
+            <h5 class="card-title">{{ name }}</h5>
+            {% if show_expire %}
+                <p class="card-text">Will expire at {{ expire_time }}</p>
+            {% endif %}
             <a href="{% autoescape false %}{{ pasted }}{% endautoescape %}" class="btn btn-light btn-sm"
                role="button" aria-pressed="true">Download</a>
             <a href="{% autoescape false %}{{ raw }}{% endautoescape %}" class="btn btn-light btn-sm" role="button"
                aria-pressed="true">Raw</a>
         </div>
-        <div class="card-body" style="background-color: #f0f0f0">
-            <div class="paste" style="background-color: #f0f0f0">
+        {#        style="background-color: #f0f0f0;overflow-x:auto"#}
+        <div class="card-body" style="background-color: #404040">
+            <div class="paste" style="overflow-x:auto">
                 {% autoescape false %}
                 {{ content }}
                 {% endautoescape %}
             </div>
         </div>
         <div class="card-footer text-muted">
-            2 days ago
+            <a href="{% autoescape false %}{{ pasted }}{% endautoescape %}" class="btn btn-light btn-sm"
+               role="button" aria-pressed="true">Download</a>
+            <a href="{% autoescape false %}{{ raw }}{% endautoescape %}" class="btn btn-light btn-sm" role="button"
+               aria-pressed="true">Raw</a>
         </div>
     </div>
 </div>
