@@ -16,13 +16,6 @@ sudo docker run --name pastebin -p 80:80 weicheng97/pastebin
 
 Do not try to just use app.run. Flask has serious problem on performance.
 
-Requirements:
-* requests
-* Pygments
-* Jinja2
-* Flask
-* gunicorn
-
 ```sh
 gunicorn -w 4 -b 0.0.0.0:80 PasteBinWeb:app
 ```
