@@ -40,16 +40,29 @@ def index():
         content = request.form['content']
         if not content:
             return render_template('index.html', content_empty=True)
-
-        expire = request.form['expire']
-        expire = int(expire) if str(expire).isnumeric() and int(expire) > 0 else -1
-        language = str(request.form['syntax'])[:20]
-
         paste = PasteDBService.Paste()
+        try:
+            expire = request.form['expire']
+        except:
+            expire = 0
+        try:
+            language = str(request.form['syntax'])[:20]
+        except:
+            language = "Plains Text"
+        try:
+            paste.poster = str(request.form['poster'])[:30]
+        except:
+            paste.poster = ""
+        try:
+            secret = request.form['secret']
+        except:
+            secret = "False"
+        expire = int(expire) if str(expire).isnumeric() and int(expire) > 0 else -1
+
         token = ''.join([random.choice(string.ascii_letters + string.digits) for ch in range(8)])
         paste.token = token
         paste.ip = request.remote_addr
-        paste.poster = str(request.form['poster'])[:30]
+
         paste.language = language
         paste.content = content
         paste.paste_time = datetime.datetime.now()
@@ -57,7 +70,8 @@ def index():
             paste.expire_time = paste.paste_time + datetime.timedelta(minutes=expire)
         else:
             paste.expire_time = endless
-        paste.secret = True if request.form['secret'] == "True" else False
+
+        paste.secret = True if secret == "True" else False
         PasteDBService.paste_file(paste)
         return redirect('/p/' + token)
     except BaseException as e:
