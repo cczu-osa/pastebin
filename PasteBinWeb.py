@@ -61,7 +61,7 @@ def index():
         PasteDBService.paste_file(paste)
         return redirect('/p/' + token)
     except BaseException as e:
-        return "error"
+        return send_file(error_file_path), 500
 
 
 # load pasted file
@@ -134,8 +134,7 @@ def show_all(page=1):
                                                                                                    'pastetable', 1)
         return render_template('all.html', list=list, pagination=all)
     except BaseException as e:
-        print(e)
-        return "error"
+        return send_file(error_file_path), 500
 
 
 @app.route('/delete/<stamp>')
@@ -164,4 +163,4 @@ def all_exception_handler(e):
 
 # entry of programme
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=81)
+    app.run(host='0.0.0.0', port=80)
