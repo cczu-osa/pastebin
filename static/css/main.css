@@ -1,10 +1,10 @@
-@font-face{
+@font-face {
     font-family:'BPreplay';
     font-style:normal;
     font-weight:400;
     src:local('BPreplay'),url(../font/400.woff) format('woff');
 }
-@font-face{
+@font-face {
     font-family:'BPreplay';
     font-style:normal;
     font-weight:700;
@@ -19,7 +19,7 @@ textarea {
     background-color: transparent !important;
     overflow: auto !important;
 }
-.form-control:focus{
+.form-control:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
@@ -30,10 +30,12 @@ textarea {
     position: relative;
     margin-bottom: 30px;
     border-radius: 7px;
-    box-shadow: 0 0 0 2px #fff, 0 4px 17px 2px rgb(8, 35, 171, 0.1)!important;
+    webkit-box-shadow: 0 5px 18px rgba(0,0,0,0.08) !important;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08) !important;
 }
 .card:hover {
-    box-shadow: 0 0 0 2px #fff, 0 7px 20px 2px rgb(8, 35, 171, 0.1)!important;
+    webkit-box-shadow: 0 7px 18px rgba(0,0,0,0.08) !important;
+    box-shadow: 0 7px 18px rgba(0,0,0,0.08) !important;
 }
 .card .card-header {
     background-color: transparent;
