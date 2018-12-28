@@ -31,9 +31,3 @@ visit http://yourdomain/all to find all files ordered by newest pasted time.
 ### Use post method to paste
 
 Post to root URL and server receive two parameters [syntax,content], quite easy.
-
-### Clean
-
-**DO NOT USE IT ON PRODUCTION ENVIRONMENT**
-
-visit http://yourdomain/clean to clean all files.
