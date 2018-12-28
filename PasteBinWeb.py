@@ -25,7 +25,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQL_URL
 db = SQLAlchemy(app)  # 初始化扩展，传入程序实例 app
 from Service import PasteDBService
 
-# 静态量
 endless = datetime.datetime(2099, 12, 31)
 
 
@@ -40,38 +39,23 @@ def index():
         content = request.form['content']
         if not content:
             return render_template('index.html', content_empty=True)
+
         paste = PasteDBService.Paste()
-        try:
-            expire = request.form['expire']
-        except:
-            expire = 0
-        try:
-            language = str(request.form['syntax'])[:20]
-        except:
-            language = "Plains Text"
-        try:
-            paste.poster = str(request.form['poster'])[:30]
-        except:
-            paste.poster = ""
-        try:
-            secret = request.form['secret']
-        except:
-            secret = "False"
-        expire = int(expire) if str(expire).isnumeric() and int(expire) > 0 else -1
+        expire = request.form.get('expire', type=int, default=129600)
+        language = request.form.get('syntax', type=str, default="Plains Text")[:20]
+        paste.poster = request.form.get('poster', type=str, default="")[:30]
+        secret = request.form.get('secret', type=str, default="False")
+        secret = True if secret == "True" else False
 
         token = ''.join([random.choice(string.ascii_letters + string.digits) for ch in range(8)])
+
         paste.token = token
         paste.ip = request.remote_addr
-
         paste.language = language
         paste.content = content
         paste.paste_time = datetime.datetime.now()
-        if expire != -1:
-            paste.expire_time = paste.paste_time + datetime.timedelta(minutes=expire)
-        else:
-            paste.expire_time = endless
-
-        paste.secret = True if secret == "True" else False
+        paste.expire_time = paste.paste_time + datetime.timedelta(minutes=expire) if expire > 0 else endless
+        paste.secret = secret
         PasteDBService.paste_file(paste)
         return redirect('/p/' + token)
     except BaseException as e:
@@ -107,7 +91,7 @@ def pasted_file(stamp):
         code = highlight(paste.content, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
         return render_template('pasted.html', name=title, content=code, pasted=paste_download,
                                raw=paste_raw, show_expire=show_expire, expire_time=expire_time)
-    except BaseException as e:
+    except:
         exstr = traceback.format_exc()
         print(exstr)
         return send_file(error_file_path)

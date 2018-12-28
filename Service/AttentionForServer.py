@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 import requests
 
-db_path = BaseService.get_db_path()
 
-token = ""
-
-
-def send_alart(content):
-    title = u"来自PasteBin的通知"
+def send_alart(content, token):
+    title = u"来自PasteBin的通知 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     data = {
         "text": title,
         "desp": content
