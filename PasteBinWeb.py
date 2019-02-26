@@ -167,7 +167,7 @@ def posts():
         paste.token = token = get_token()
         paste.ip = request.remote_addr
         paste.poster = request.form.get('poster', type=str, default="")[:30]
-        paste.language = request.form.get('poster', type=str, default="")[:50]
+        paste.language = request.form.get('title', type=str, default="")[:50]
         paste.content = content
         paste.paste_time = datetime.datetime.now()
         paste.expire_time = endless
