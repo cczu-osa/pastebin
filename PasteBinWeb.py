@@ -50,7 +50,7 @@ def index():
         token = ''.join([random.choice(string.ascii_letters + string.digits) for ch in range(8)])
 
         paste.token = token
-        paste.ip = request.remote_addr
+        paste.ip = request.headers['X-Forwarded-For']
         paste.language = language
         paste.content = content
         paste.paste_time = datetime.datetime.now()
@@ -58,9 +58,7 @@ def index():
         paste.secret = secret
         PasteDBService.paste_file(paste)
         return redirect('/p/' + token)
-    except BaseException as e:
-        msg = traceback.format_exc()
-        print(msg)
+    except:
         return send_file(error_file_path), 500
 
 
@@ -135,23 +133,6 @@ def show_all(page=1):
         return render_template('all.html', list=list, pagination=all)
     except BaseException as e:
         return send_file(error_file_path), 500
-
-
-@app.route('/delete/<stamp>')
-def delete_one(stamp):
-    try:
-        if str(request.remote_addr).startswith("219.230.148.127"):
-            PasteDBService.delete_one(stamp)
-            return render_template('index.html')
-        else:
-            return "你没有权限执行此操作"
-    except:
-        return render_template('index.html')
-
-
-@app.route('/test')
-def test():
-    return request.remote_addr
 
 
 @app.route('/favicon.ico')
