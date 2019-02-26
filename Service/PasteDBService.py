@@ -21,7 +21,7 @@ class Paste(db.Model):
     token = db.Column(db.String(8), unique=True, index=True)
     ip = db.Column(db.String(20))  # 来源ip
     poster = db.Column(db.String(30))  # poster
-    language = db.Column(db.String(20))  # 语言
+    language = db.Column(db.String(50))  # 语言
     content = db.Column(db.Text)  # 内容
     paste_time = db.Column(db.DateTime)  # 发布时间
     expire_time = db.Column(db.DateTime)  # 过期时间

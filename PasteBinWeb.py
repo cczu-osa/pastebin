@@ -2,9 +2,11 @@
 import datetime
 import os
 import random
+import re
 import string
 import traceback
 
+import markdown2
 from flask import Flask, render_template, request, send_file, redirect, send_from_directory, Response, make_response
 from flask_sqlalchemy import SQLAlchemy
 from pygments import highlight
@@ -27,6 +29,14 @@ from Service import PasteDBService
 
 endless = datetime.datetime(2099, 12, 31)
 
+# PostBin的MarkDown加载器
+# 自动格式化连接
+link_patterns = [(re.compile(
+    r'((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:[0-9]+)?|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)'),
+                  r'\1')]
+markdown = markdown2.Markdown(extras=["link-patterns", "fenced-code-blocks", "cuddled-lists", "tables", "footnotes"],
+                              link_patterns=link_patterns)
+
 
 @app.route('/')
 def st():
@@ -47,10 +57,8 @@ def index():
         secret = request.form.get('secret', type=str, default="False")
         secret = True if secret == "True" else False
 
-        token = ''.join([random.choice(string.ascii_letters + string.digits) for ch in range(8)])
-
-        paste.token = token
-        paste.ip = request.headers['X-Forwarded-For']
+        paste.token = token = get_token()
+        paste.ip = request.remote_addr
         paste.language = language
         paste.content = content
         paste.paste_time = datetime.datetime.now()
@@ -115,7 +123,7 @@ def download_file(stamp):
         response = make_response(paste.content)
         response.headers["Content-Disposition"] = "attachment; filename=" + stamp + ".txt"
         return response
-    except BaseException as e:
+    except:
         return send_file(error_file_path)
 
 
@@ -141,10 +149,78 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
+# 2019-02-26
+# 更新postbin功能
+@app.route('/post')
+def posts_main():
+    return render_template('post.html')
+
+
+@app.route('/post', methods=['POST'])
+def posts():
+    try:
+        content = request.form['content']
+        if not content:
+            return render_template('post.html', content_empty=True)
+
+        paste = PasteDBService.Paste()
+        paste.token = token = get_token()
+        paste.ip = request.remote_addr
+        paste.poster = request.form.get('poster', type=str, default="")[:30]
+        paste.language = request.form.get('poster', type=str, default="")[:50]
+        paste.content = content
+        paste.paste_time = datetime.datetime.now()
+        paste.expire_time = endless
+        paste.secret = True
+        PasteDBService.paste_file(paste)
+        return redirect('/post/v/' + token)
+    except:
+        msg = traceback.format_exc()
+        print(msg)
+        return send_file(error_file_path), 500
+
+
+@app.route('/post/v/<stamp>')
+def posted_file(stamp):
+    try:
+        try:
+            paste = PasteDBService.get_file(stamp)
+        except:
+            return send_file(error_file_path)
+
+        date = paste.paste_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        if len(paste.language) <= 0:
+            title = 'No Title'
+        else:
+            title = paste.language
+
+        if len(paste.poster) > 0:
+            name = 'Posted by ' + paste.poster + ' in ' + date
+        else:
+            name = 'Posted in ' + date
+
+        paste_raw = '/r/' + stamp
+        code = markdown.convert(paste.content)
+        return render_template('posted.html', post_title=title, name=name, content=code,
+                               raw=paste_raw)
+    except:
+        return send_file(error_file_path)
+
+
+@app.route('/post/r/<stamp>')
+def posted_raw_file(stamp):
+    return redirect('/p/' + stamp)
+
+
 # err no such file
 @app.errorhandler(Exception)
 def all_exception_handler(e):
     return send_file(error_file_path), 404
+
+
+def get_token():
+    return ''.join([random.choice(string.ascii_letters + string.digits) for ch in range(8)])
 
 
 # entry of programme

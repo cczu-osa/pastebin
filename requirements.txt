@@ -1,3 +1,4 @@
+markdown2
 sqlalchemy
 Pygments
 Jinja2
