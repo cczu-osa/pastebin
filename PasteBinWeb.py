@@ -59,6 +59,8 @@ def index():
         PasteDBService.paste_file(paste)
         return redirect('/p/' + token)
     except BaseException as e:
+        msg = traceback.format_exc()
+        print(msg)
         return send_file(error_file_path), 500
 
 
@@ -145,6 +147,11 @@ def delete_one(stamp):
             return "你没有权限执行此操作"
     except:
         return render_template('index.html')
+
+
+@app.route('/test')
+def test():
+    return request.remote_addr
 
 
 @app.route('/favicon.ico')
