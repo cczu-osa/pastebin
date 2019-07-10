@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/css/pastebin@1551174575.css" rel="stylesheet">
-    <link href="../static/css/main.css" rel="stylesheet">
-    <link href="../static/css/twemoji-awesome.css" rel="stylesheet">
+    <link href="{{ rootdir }}/static/css/pastebin@1551174575.css" rel="stylesheet">
+    <link href="{{ rootdir }}/static/css/main.css" rel="stylesheet">
+    <link href="{{ rootdir }}/static/css/twemoji-awesome.css" rel="stylesheet">
     <title>PasteBin - All pasted files</title>
 </head>
 <body>
@@ -16,9 +16,9 @@
             <br><br>
             <h2 style="color:#f4511e;"><b>PasteBin</b></h2>
             <br>
-            <a href="/" class="header-nav">Home</a>
-            <a href="/all" class="header-nav active">Pasted</a>
-            <a href="/static/about.html" class="header-nav">About</a>
+            <a href="{{ rootdir }}/" class="header-nav">Home</a>
+            <a href="{{ rootdir }}/all" class="header-nav active">Pasted</a>
+            <a href="{{ rootdir }}/static/about.html" class="header-nav">About</a>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
             {% for paste in list %}
             <div class="card" style="overflow:auto">
                 <div class="card-header">
-                    <a href="/p/{{ paste.token }}">Id:{{ paste.token }} Pasted
+                    <a href="{{ rootdir }}/p/{{ paste.token }}">Id:{{ paste.token }} Pasted
                         in:{{ paste.paste_time.strftime("%Y-%m-%d %H:%M:%S") }}</a>
                 </div>
                 <div class="card-body" style="background-color: #f9f9f9;">
@@ -37,7 +37,7 @@
                         {% autoescape false %}
                         {{ paste.content }}
                         {% endautoescape %}
-                        <a href="/p/{{ paste.token }}">...more</a>
+                        <a href="{{ rootdir }}/p/{{ paste.token }}">...more</a>
                     </div>
                 </div>
             </div>
@@ -49,14 +49,14 @@
         <div class="col">
             <div class="btn-group" role="group">
                 {% if pagination.has_prev %}
-                    <a href="/all/{{ pagination.prev_num }}" class="btn btn-light btn-sm" role="button">Newer
+                    <a href="{{ rootdir }}/all/{{ pagination.prev_num }}" class="btn btn-light btn-sm" role="button">Newer
                         Pastes</a>
                 {% else %}
                     <a href="#" class="btn btn-light btn-sm disabled" tabindex="-1" role="button"
                        aria-disabled="true">Newer Pastes</a>
                 {% endif %}
                 {% if pagination.has_next %}
-                    <a href="/all/{{ pagination.next_num }}" class="btn btn-light btn-sm" role="button">Older
+                    <a href="{{ rootdir }}/all/{{ pagination.next_num }}" class="btn btn-light btn-sm" role="button">Older
                         Pastes</a>
                 {% else %}
                     <a href="#" class="btn btn-light btn-sm disabled" tabindex="-1" role="button"

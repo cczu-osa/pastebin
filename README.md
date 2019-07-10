@@ -2,14 +2,14 @@
 
 An simple PasteBin uses pygments to generate html and Flask as background.
 
-Demo https://paste.cczu.org
+Demo https://icpc.cczu.edu.cn/paste
 
 ## Run
 
 ### With Docker
 
 ```sh
-sudo docker run --restart=always --name pastebin -p 80:80 weicheng97/pastebin:2.0
+sudo docker run --restart=always --name pastebin -p 127.0.0.1:80:80 -v /var/pastebin:/pastebin/data weicheng97/pastebin:2.0
 ```
 
 ### Directly
@@ -26,7 +26,7 @@ Just open it and enjoy pasting.
 
 ### View all files
 
-visit http://yourdomain/all to find all files ordered by newest pasted time.
+visit http://pastebinpath/all to find all files ordered by newest pasted time.
 
 ### Use post method to paste
 
