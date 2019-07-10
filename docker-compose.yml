@@ -4,4 +4,4 @@ web:
     ports:
         - "80:80"
     volumes:
-        - .:/flask_compose
+        - ./pastedata:/pastebin/data

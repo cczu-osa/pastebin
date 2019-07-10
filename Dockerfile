@@ -1,7 +1,7 @@
 FROM python:3.7-rc-alpine
 MAINTAINER Weicheng Jiang "williamjiang97@gmail.com"
-ADD . /flask_compose
-WORKDIR /flask_compose
+ADD . /pastebin
+WORKDIR /pastebin
 RUN apk update && apk add tzdata \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
