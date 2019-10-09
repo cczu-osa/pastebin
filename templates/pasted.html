@@ -34,9 +34,9 @@
                 ~ {{ expire_time }}
             {% endif %}
             </p>
-            <a href="{% autoescape false %}{{ pasted }}{% endautoescape %}" class="btn btn-light btn-sm"
+            <a href="{% autoescape false %}{{ rootdir }}{{ pasted }}{% endautoescape %}" class="btn btn-light btn-sm"
                role="button" aria-pressed="true">Download</a>
-            <a href="{% autoescape false %}{{ raw }}{% endautoescape %}" class="btn btn-light btn-sm" role="button"
+            <a href="{% autoescape false %}{{ rootdir }}{{ raw }}{% endautoescape %}" class="btn btn-light btn-sm" role="button"
                aria-pressed="true">Raw</a>
         </div>
         {#        style="background-color: #f0f0f0;overflow-x:auto"#}
@@ -48,9 +48,9 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-            <a href="{% autoescape false %}{{ pasted }}{% endautoescape %}" class="btn btn-light btn-sm"
+            <a href="{% autoescape false %}{{ rootdir }}{{ pasted }}{% endautoescape %}" class="btn btn-light btn-sm"
                role="button" aria-pressed="true">Download</a>
-            <a href="{% autoescape false %}{{ raw }}{% endautoescape %}" class="btn btn-light btn-sm" role="button"
+            <a href="{% autoescape false %}{{ rootdir }}{{ raw }}{% endautoescape %}" class="btn btn-light btn-sm" role="button"
                aria-pressed="true">Raw</a>
         </div>
     </div>
