@@ -105,7 +105,7 @@ def index():
         paste.expire_time = paste.paste_time + datetime.timedelta(minutes=expire) if expire > 0 else endless
         paste.secret = secret
         PasteDBService.paste_file(paste)
-        return redirect('/p/' + token)
+        return redirect(rootdir + '/p/' + token)
     except:
         return render_template('error.html', rootdir=rootdir), 500
 
