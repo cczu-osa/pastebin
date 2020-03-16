@@ -1,5 +1,7 @@
 # PasteBin
 
+Language: [CN](README_cn.md)
+
 An simple PasteBin uses pygments to generate html and Flask as background.
 
 Demo https://icpc.cczu.edu.cn/paste
@@ -21,7 +23,8 @@ gunicorn -w 4 -b 0.0.0.0:80 PasteBinWeb:app
 ```
 
 ### Reverse proxy
-If use a subpath to install, e.g. https://example.com/paste, you need to create a text file `settings.json` in the data folder, and type content as follow:
+
+If you want to use another URL, e.g. https://example.com/paste, you need to create a text file `settings.json` in the data folder, and type content as follow:
 
 ```
 {
