@@ -21,11 +21,11 @@ gunicorn -w 4 -b 0.0.0.0:80 PasteBinWeb:app
 ```
 
 ### Reverse proxy
-If use a subpath to install, e.g. example.com/paste, you need to create a text file `settings.json` in the data folder, and type content as follow:
+If use a subpath to install, e.g. https://example.com/paste, you need to create a text file `settings.json` in the data folder, and type content as follow:
 
 ```
 {
-    "rootdir": "/paste"
+    "baseurl": "https://example.com/paste"
 }
 ```
 

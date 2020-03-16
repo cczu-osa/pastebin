@@ -23,6 +23,10 @@ app = Flask(__name__)
 p = app.root_path
 error_file_path = os.path.join(p, 'static', 'error.html')
 
+# 检查data文件夹
+if not os.path.isdir('data'):
+    os.mkdir('data')
+
 # 初始化db
 if not os.path.isfile('data/paste.db'):
     conn = sqlite3.connect('data/paste.db')
@@ -55,12 +59,11 @@ from Service import PasteDBService
 # settings
 try:
     with open('data/settings.json', 'r') as settings_file:
-        rootdir = json.load(settings_file)['rootdir']
+        settings = json.load(settings_file)
+        baseurl = settings.get('baseurl', settings.get('rootdir', ''))
 except FileNotFoundError:
-    with open('data/settings.json', 'w') as settings_file:
-        settings_obj = {'rootdir':''}
-        json.dump(settings_obj, settings_file)
-    rootdir = settings_obj['rootdir']
+    # default
+    baseurl = ''
 
 endless = datetime.datetime(2099, 12, 31)
 
@@ -75,12 +78,12 @@ markdown = markdown2.Markdown(extras=["link-patterns", "fenced-code-blocks", "cu
 
 @app.route('/')
 def st():
-    return render_template('index.html', rootdir=rootdir)
+    return render_template('index.html', baseurl=baseurl)
 
 
 @app.route('/about')
 def about_page():
-    return render_template('about.html', rootdir=rootdir)
+    return render_template('about.html', baseurl=baseurl)
 
 
 @app.route('/', methods=['POST'])
@@ -88,7 +91,7 @@ def index():
     try:
         content = request.form['content']
         if not content:
-            return render_template('index.html', content_empty=True, rootdir=rootdir)
+            return render_template('index.html', content_empty=True, baseurl=baseurl)
 
         paste = PasteDBService.Paste()
         expire = request.form.get('expire', type=int, default=129600)
@@ -105,9 +108,9 @@ def index():
         paste.expire_time = paste.paste_time + datetime.timedelta(minutes=expire) if expire > 0 else endless
         paste.secret = secret
         PasteDBService.paste_file(paste)
-        return redirect(rootdir + '/p/' + token)
+        return redirect(baseurl + '/p/' + token)
     except:
-        return render_template('error.html', rootdir=rootdir), 500
+        return render_template('error.html', baseurl=baseurl), 500
 
 
 # load pasted file
@@ -117,7 +120,7 @@ def pasted_file(stamp):
         try:
             paste = PasteDBService.get_file(stamp)
         except:
-            return render_template('error.html', rootdir=rootdir)
+            return render_template('error.html', baseurl=baseurl)
 
         date = paste.paste_time.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -138,11 +141,11 @@ def pasted_file(stamp):
         paste_raw = '/r/' + stamp
         code = highlight(paste.content, lang, formatter).decode("utf8").replace('highlighttable', 'pastetable', 1)
         return render_template('pasted.html', name=title, content=code, pasted=paste_download,
-                               raw=paste_raw, show_expire=show_expire, expire_time=expire_time, rootdir=rootdir)
+                               raw=paste_raw, show_expire=show_expire, expire_time=expire_time, baseurl=baseurl)
     except:
         exstr = traceback.format_exc()
         print(exstr)
-        return render_template('error.html', rootdir=rootdir)
+        return render_template('error.html', baseurl=baseurl)
 
 
 # raw file
@@ -152,7 +155,7 @@ def raw(stamp):
         paste = PasteDBService.get_file(stamp)
         return Response(paste.content, mimetype='text/plain')
     except IOError:
-        return render_template('error.html', rootdir=rootdir)
+        return render_template('error.html', baseurl=baseurl)
 
 
 # download file
@@ -164,7 +167,7 @@ def download_file(stamp):
         response.headers["Content-Disposition"] = "attachment; filename=" + stamp + ".txt"
         return response
     except:
-        return render_template('error.html', rootdir=rootdir)
+        return render_template('error.html', baseurl=baseurl)
 
 
 @app.route('/all')
@@ -178,9 +181,9 @@ def show_all(page=1):
             formatter = HtmlFormatter(encoding='utf-8', style='native', linenos=True)
             paste.content = highlight(paste.content[:140], lang, formatter).decode("utf8").replace('highlighttable',
                                                                                                    'pastetable', 1)
-        return render_template('all.html', list=list, pagination=all, rootdir=rootdir)
+        return render_template('all.html', list=list, pagination=all, baseurl=baseurl)
     except BaseException as e:
-        return render_template('error.html', rootdir=rootdir), 500
+        return render_template('error.html', baseurl=baseurl), 500
 
 
 @app.route('/favicon.ico')
@@ -193,7 +196,7 @@ def favicon():
 # 更新postbin功能
 @app.route('/post')
 def posts_main():
-    return render_template('post.html', rootdir=rootdir)
+    return render_template('post.html', baseurl=baseurl)
 
 
 @app.route('/post', methods=['POST'])
@@ -201,7 +204,7 @@ def posts():
     try:
         content = request.form['content']
         if not content:
-            return render_template('post.html', content_empty=True, rootdir=rootdir)
+            return render_template('post.html', content_empty=True, baseurl=baseurl)
 
         paste = PasteDBService.Paste()
         paste.token = token = get_token()
@@ -217,7 +220,7 @@ def posts():
     except:
         msg = traceback.format_exc()
         print(msg)
-        return render_template('error.html', rootdir=rootdir), 500
+        return render_template('error.html', baseurl=baseurl), 500
 
 
 @app.route('/post/v/<stamp>')
@@ -226,7 +229,7 @@ def posted_file(stamp):
         try:
             paste = PasteDBService.get_file(stamp)
         except:
-            return render_template('error.html', rootdir=rootdir)
+            return render_template('error.html', baseurl=baseurl)
 
         date = paste.paste_time.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -243,9 +246,9 @@ def posted_file(stamp):
         paste_raw = '/r/' + stamp
         code = markdown.convert(paste.content)
         return render_template('posted.html', post_title=title, name=name, content=code,
-                               raw=paste_raw, rootdir=rootdir)
+                               raw=paste_raw, baseurl=baseurl)
     except:
-        return render_template('error.html', rootdir=rootdir)
+        return render_template('error.html', baseurl=baseurl)
 
 
 @app.route('/post/r/<stamp>')
@@ -256,7 +259,7 @@ def posted_raw_file(stamp):
 # err no such file
 @app.errorhandler(Exception)
 def all_exception_handler(e):
-    return render_template('error.html', rootdir=rootdir), 404
+    return render_template('error.html', baseurl=baseurl), 404
 
 
 def get_token():
