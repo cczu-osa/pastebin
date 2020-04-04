@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,240 +11,140 @@
     <link href="{{ baseurl }}/static/css/twemoji-awesome.css" rel="stylesheet">
     <title>PasteBin</title>
 </head>
+
 <body>
-{% if show_alart %}
-    <div class="alert alert-danger" role="alert">
-        <p>{{ alart_msg }}</p>
-    </div>
-{% endif %}
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <br><br>
-            <h2 style="color:#f4511e;"><b>PasteBin</b></h2>
-            <br>
-            <a href="{{ baseurl }}/" class="header-nav active">Home</a>
-            <a href="{{ baseurl }}/all" class="header-nav">Pasted</a>
-            <a href="{{ baseurl }}/post" class="header-nav">PostBin</a>
-            <a href="{{ baseurl }}/about" class="header-nav">About</a>
-        </div>
-    </div>
+    <br><br>
+    <h2 style="color:#f4511e;"><b>PasteBin</b></h2>
+    <br>
+    <a href="{{ baseurl }}/" class="header-nav active">Home</a>
+    <a href="{{ baseurl }}/all" class="header-nav">Pasted</a>
+    {#            <a href="{{ baseurl }}/post" class="header-nav">PostBin</a>#}
+    <a href="{{ baseurl }}/about" class="header-nav">About</a>
 </div>
 <br><br>
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <form action="{{ baseurl }}/" method="POST" id="pastefile" name="pasteform">
-                <div class="card">
-                    <div class="card-header">
-                        <h4><i class="twa twa-sparkles"></i> Options</h4>
+    <form id="pastefile" name="pasteform">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="twa twa-sparkles"></i> Options</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputPoster">Poster:</label>
+                        <input type="text" class="form-control" id="id_poster" name="poster"
+                               aria-describedby="posterHelp" placeholder="Max 30 characters, can be blank"
+                               maxlength="30">
                     </div>
-                    <div class="card-body">
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="inputPoster">Poster:</label>
-                                <input type="text" class="form-control" id="id_poster" name="poster"
-                                    aria-describedby="posterHelp"
-                                    placeholder="Max 30 characters, can be blank" maxlength="30">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputExpire">Expire:</label>
-                                <select id="id_expire" class="form-control" name="expire">
-                                    <option value="129600" selected="selected">3 months</option>
-                                    <option value="60">1 hour</option>
-                                    <option value="1440">1 day</option>
-                                    <option value="10080">7 days</option>
-                                    <option value="43200">30 days</option>
-                                    <option value="-1">Permanent</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputSecret">Secret:</label>
-                                <select id="id_expire" class="form-control" name="secret">
-                                    <option value="False" selected="selected">No, show it on list.</option>
-                                    <option value="True">Yes, I want to keep it secret.</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputLanguage">Language:</label>
-                            <select class="selectpicker form-control" data-live-search="true"
-                                    id="id_language" name="syntax" autocomplete="off"
-                                    title="Choose one of the following Language...">
-                                <option value="Plains Text" selected>Plains Text</option>
-                                <option value="aspx-cs">aspx-cs</option>
-                                <option value="aspx-vb">aspx-vb</option>
-                                <option value="Bash">Bash</option>
-                                <option value="Batchfile">Batchfile</option>
-                                <option value="C">C</option>
-                                <option value="C++">C++</option>
-                                <option value="CMake">CMake</option>
-                                <option value="C#">C#</option>
-                                <option value="CSS">CSS</option>
-                                <option value="CSS+Django/Jinja">CSS+Django/Jinja</option>
-                                <option value="CSS+Ruby">CSS+Ruby</option>
-                                <option value="CSS+Genshi Text">CSS+Genshi Text</option>
-                                <option value="CSS+Mako">CSS+Mako</option>
-                                <option value="CSS+Myghty">CSS+Myghty</option>
-                                <option value="CSS+PHP">CSS+PHP</option>
-                                <option value="CSS+Smarty">CSS+Smarty</option>
-                                <option value="Cython">Cython</option>
-                                <option value="D">D</option>
-                                <option value="Delphi">Delphi</option>
-                                <option value="Diff">Diff</option>
-                                <option value="Django/Jinja">Django/Jinja</option>
-                                <option value="Erlang">Erlang</option>
-                                <option value="Fortran">Fortran</option>
-                                <option value="Go">Go</option>
-                                <option value="Haskell">Haskell</option>
-                                <option value="HTML">HTML</option>
-                                <option value="HTML+Cheetah">HTML+Cheetah</option>
-                                <option value="HTML+Django/Jinja">HTML+Django/Jinja</option>
-                                <option value="HTML+Evoque">HTML+Evoque</option>
-                                <option value="HTML+Genshi">HTML+Genshi</option>
-                                <option value="HTML+Mako">HTML+Mako</option>
-                                <option value="HTML+Myghty">HTML+Myghty</option>
-                                <option value="HTML+PHP">HTML+PHP</option>
-                                <option value="HTML+Smarty">HTML+Smarty</option>
-                                <option value="HTML+Velocity">HTML+Velocity</option>
-                                <option value="haXe">haXe</option>
-                                <option value="Hybris">Hybris</option>
-                                <option value="Jade">Jade</option>
-                                <option value="Java">Java</option>
-                                <option value="JavaScript">JavaScript</option>
-                                <option value="JavaScript+Cheetah">JavaScript+Cheetah</option>
-                                <option value="JavaScript+Django/Jinja">JavaScript+Django/Jinja</option>
-                                <option value="JavaScript+Ruby">JavaScript+Ruby</option>
-                                <option value="JavaScript+Genshi Text">JavaScript+Genshi Text</option>
-                                <option value="JavaScript+Mako">JavaScript+Mako</option>
-                                <option value="JavaScript+Myghty">JavaScript+Myghty</option>
-                                <option value="JavaScript+PHP">JavaScript+PHP</option>
-                                <option value="JavaScript+Smarty">JavaScript+Smarty</option>
-                                <option value="Java Server Page">Java Server Page</option>
-                                <option value="Literate Haskell">Literate Haskell</option>
-                                <option value="Lighttpd configuration file">Lighttpd configuration file</option>
-                                <option value="LLVM">LLVM</option>
-                                <option value="Logtalk">Logtalk</option>
-                                <option value="Lua">Lua</option>
-                                <option value="Makefile">Makefile</option>
-                                <option value="Mako">Mako</option>
-                                <option value="MAQL">MAQL</option>
-                                <option value="Mason">Mason</option>
-                                <option value="Matlab">Matlab</option>
-                                <option value="Matlab session">Matlab session</option>
-                                <option value="MiniD">MiniD</option>
-                                <option value="Modelica">Modelica</option>
-                                <option value="Modula-2">Modula-2</option>
-                                <option value="MOOCode">MOOCode</option>
-                                <option value="MuPAD">MuPAD</option>
-                                <option value="MXML">MXML</option>
-                                <option value="Myghty">Myghty</option>
-                                <option value="MySQL">MySQL</option>
-                                <option value="NASM">NASM</option>
-                                <option value="Newspeak">Newspeak</option>
-                                <option value="Nginx configuration file">Nginx configuration file</option>
-                                <option value="NumPy">NumPy</option>
-                                <option value="objdump">objdump</option>
-                                <option value="Objective-C">Objective-C</option>
-                                <option value="Objective-J">Objective-J</option>
-                                <option value="OCaml">OCaml</option>
-                                <option value="Ooc">Ooc</option>
-                                <option value="Perl">Perl</option>
-                                <option value="PHP">PHP</option>
-                                <option value="PostScript">PostScript</option>
-                                <option value="Gettext Catalog">Gettext Catalog</option>
-                                <option value="POVRay">POVRay</option>
-                                <option value="Prolog">Prolog</option>
-                                <option value="Properties">Properties</option>
-                                <option value="Python 3.0 Traceback">Python 3.0 Traceback</option>
-                                <option value="Python console session">Python console session</option>
-                                <option value="Python Traceback">Python Traceback</option>
-                                <option value="Python">Python</option>
-                                <option value="Python 3">Python 3</option>
-                                <option value="Ragel">Ragel</option>
-                                <option value="Ragel in C Host">Ragel in C Host</option>
-                                <option value="Ragel in CPP Host">Ragel in CPP Host</option>
-                                <option value="Ragel in D Host">Ragel in D Host</option>
-                                <option value="Embedded Ragel">Embedded Ragel</option>
-                                <option value="Ragel in Java Host">Ragel in Java Host</option>
-                                <option value="Ragel in Objective C Host">Ragel in Objective C Host</option>
-                                <option value="Ragel in Ruby Host">Ragel in Ruby Host</option>
-                                <option value="Ruby">Ruby</option>
-                                <option value="Ruby irb session">Ruby irb session</option>
-                                <option value="REBOL">REBOL</option>
-                                <option value="Redcode">Redcode</option>
-                                <option value="RHTML">RHTML</option>
-                                <option value="reStructuredText">reStructuredText</option>
-                                <option value="Sass">Sass</option>
-                                <option value="Scala">Scala</option>
-                                <option value="Scaml">Scaml</option>
-                                <option value="Scheme">Scheme</option>
-                                <option value="SCSS">SCSS</option>
-                                <option value="SQL">SQL</option>
-                                <option value="sqlite3con">sqlite3con</option>
-                                <option value="TeX">TeX</option>
-                                <option value="VB.net">VB.net</option>
-                                <option value="XML">XML</option>
-                                <option value="XML+Cheetah">XML+Cheetah</option>
-                                <option value="XML+Django/Jinja">XML+Django/Jinja</option>
-                                <option value="XML+Ruby">XML+Ruby</option>
-                                <option value="XML+Evoque">XML+Evoque</option>
-                                <option value="XML+Mako">XML+Mako</option>
-                                <option value="XML+Myghty">XML+Myghty</option>
-                                <option value="XML+PHP">XML+PHP</option>
-                                <option value="XML+Smarty">XML+Smarty</option>
-                                <option value="XML+Velocity">XML+Velocity</option>
-                                <option value="XQuery">XQuery</option>
-                                <option value="XSLT">XSLT</option>
-                                <option value="YAML">YAML</option>
-                            </select>
-                        </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputExpire">Expire:</label>
+                        <select id="id_expire" class="form-control" name="expire">
+                            <option value="2592000" selected="selected">1 month</option>
+                            <option value="7776000">3 months</option>
+                            <option value="3600">1 hour</option>
+                            <option value="86400">1 day</option>
+                            <option value="604800">1 week</option>
+                            <option value="-1">Permanent</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputSecret">Secret:</label>
+                        <select id="id_secret" class="form-control" name="secret">
+                            <option value="false" selected="selected">No, show it on list.</option>
+                            <option value="true">Yes, I want to keep it secret.</option>
+                        </select>
                     </div>
                 </div>
-                <br>
-                <div class="card">
-                    <div class="card-header">
-                        <h4><i class="twa twa-tada"></i> Content</h4>
-                    </div>
-
-                    <div class="card-body" style="padding:0;">
-                        <div class="form-group" style="margin-bottom:0;">
-                            <textarea class="form-control {% if content_empty %}is-invalid{% endif %}" id="id_content"
-                                    name="content" rows="20" wrap="off"
-                                    style="overflow:scroll;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;"></textarea>
-                            {% if content_empty %}
-                                <div class="invalid-feedback">
-                                    Please Fill the Content!
-                                </div>
-                            {% endif %}
-                        </div>
-                        {#              TODO ADD FILEUPLOAD OPTION#}
-                        {#                <div class="form-group">#}
-                        {#                    <label for="exampleFormControlFile1">Or you can upload file to paste!</label>#}
-                        {#                    <input type="file" class="form-control-file" id="id_upload" name="upload">#}
-                        {#                </div>#}
-                    </div>
+                <div class="form-group">
+                    <label for="inputLanguage">Language:</label>
+                    <select class="selectpicker form-control" data-live-search="true" id="id_language"
+                            name="syntax" autocomplete="off" title="Choose one of the following Language...">
+                        <!-- filled by js -->
+                    </select>
                 </div>
-                <div style="text-align:right;"><button type="submit" class="page-btn btn btn-radius btn-white">Paste!</button></div>
-            </form>
+            </div>
         </div>
-    </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="twa twa-tada"></i> Content</h4>
+            </div>
+
+            <div class="card-body" style="padding:0;">
+                <div class="form-group" style="margin-bottom:0;">
+                            <textarea class="form-control" id="id_content" name="content" rows="20" wrap="off"
+                                      style="overflow:scroll;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;"></textarea>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <button type="button" class="page-btn btn btn-radius btn-white" onclick="send()">Paste!</button>
+        </div>
+    </form>
 </div>
 <br>
+
 <footer class="footer">
     <div class="container">
-        <span class="text-muted"><strong>Copyright </strong><a href="https://github.com/cczu-osa">CCZU OSA</a> © 2018
-</span>
+            <span class="text-muted">
+                <strong>Copyright </strong><a href="https://github.com/cczu-osa">CCZU OSA</a> © 2018
+            </span>
     </div>
 </footer>
 <br>
+
+<div id="alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Content can not be empty!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-select/1.13.5/js/bootstrap-select.min.js"></script>
-<script src="{{ baseurl }}/static/languages.js" type="text/javascript"></script>
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+<script>
+    axios.get('{{ baseurl }}/static/languages.json').then(res => {
+        data = res.data
+        s = ''
+        for (i in data) {
+            s += `<option value="${data[i]}">${i}</option>`
+        }
+        $('#id_language').html(s)
+
+        $('.typeahead').typeahead(data);
+        $('.selectpicker').selectpicker('refresh');
+    })
+
+    function send() {
+        if ($('#id_content').val() === '') {
+            $('#alert-modal').modal('show')
+            return
+        }
+        var data = {
+            poster: $('#id_poster').val(),
+            language: $('#id_language').val(),
+            content: $('#id_content').val(),
+            expire: parseInt($('#id_expire').val()),
+            secret: $('#id_secret').val() === 'true'
+        }
+        axios.post('{{ baseurl }}/paste', data).then(res => {
+            location.href = '{{ baseurl }}/p/' + res.data.token;
+        })
+    }
+</script>
 </body>
+
 </html>

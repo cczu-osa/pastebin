@@ -1,7 +1,6 @@
-markdown2
-sqlalchemy
-Pygments
-Jinja2
-Flask
-gunicorn
+flask
+flask-restful
 flask-sqlalchemy
+sqlalchemy
+APScheduler
+gunicorn

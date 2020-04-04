@@ -1,7 +1,0 @@
-web:
-    build: .
-    command: python -u PasteBinWeb.py
-    ports:
-        - "80:80"
-    volumes:
-        - ./pastedata:/pastebin/data

@@ -1,28 +1,32 @@
 @font-face {
-    font-family:'BPreplay';
-    font-style:normal;
-    font-weight:400;
-    src:local('BPreplay'),url(../font/400.woff) format('woff');
+    font-family: 'BPreplay';
+    font-style: normal;
+    font-weight: 400;
+    src: local('BPreplay'), url(../font/400.woff) format('woff');
 }
+
 @font-face {
-    font-family:'BPreplay';
-    font-style:normal;
-    font-weight:700;
-    src:local('BPreplay Bold'),url(../font/700.woff) format('woff');
+    font-family: 'BPreplay';
+    font-style: normal;
+    font-weight: 700;
+    src: local('BPreplay Bold'), url(../font/700.woff) format('woff');
 }
 
 html, h1, h2, h3, h4, h5, h6, p, a, label, input, small, span {
     font-family: 'BPreplay', -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, Verdana, sans-serif;
 }
+
 textarea {
     border: 0 !important;
     background-color: transparent !important;
     overflow: auto !important;
 }
+
 .form-control:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
 .card {
     transition: all .5s ease;
     background-color: #fff;
@@ -30,13 +34,15 @@ textarea {
     position: relative;
     margin-bottom: 30px;
     border-radius: 7px;
-    webkit-box-shadow: 0 5px 18px rgba(0,0,0,0.08) !important;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.08) !important;
+    webkit-box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08) !important;
 }
+
 .card:hover {
-    webkit-box-shadow: 0 7px 18px rgba(0,0,0,0.08) !important;
-    box-shadow: 0 7px 18px rgba(0,0,0,0.08) !important;
+    webkit-box-shadow: 0 7px 18px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.08) !important;
 }
+
 .card .card-header {
     background-color: transparent;
     border-bottom-color: transparent;
@@ -46,13 +52,16 @@ textarea {
     align-self: center;
     width: 100%;
 }
+
 .card-header {
     padding: 15px 30px;
 }
+
 .card-footer {
     background-color: #fff;
     padding: 15px 30px;
 }
+
 .card .card-header:before {
     content: '';
     width: 3px;
@@ -62,10 +71,12 @@ textarea {
     display: block;
     left: 0;
 }
+
 .card .card-body {
     background-color: transparent;
     padding: 20px 30px 20px 30px;
 }
+
 .header-nav {
     transition: all .15s ease;
     padding: .5rem 1rem;
@@ -74,20 +85,24 @@ textarea {
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
+
 .header-nav:hover {
     color: #fff;
     background: #3454f5;
     text-decoration: none;
 }
+
 .header-nav.active {
     transition: all .5s ease;
     color: #fff;
     background: #3454f5;
-    box-shadow: 0 4px 20px 4px rgb(8, 35, 171, 0.1)!important;
+    box-shadow: 0 4px 20px 4px rgb(8, 35, 171, 0.1) !important;
 }
+
 .header-nav.active:hover {
-    box-shadow: 0 2px 5px 1px rgb(8, 35, 171, 0.1)!important;
+    box-shadow: 0 2px 5px 1px rgb(8, 35, 171, 0.1) !important;
 }
+
 .btn {
     font-size: 14px;
     line-height: 23px;
@@ -95,20 +110,28 @@ textarea {
     letter-spacing: .4px;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
+
 .btn-radius {
     border-radius: 2em;
     padding: 6px 18px;
 }
+
 .btn-white {
     color: #3454f5;
     background-color: #fff;
 }
+
 .btn:hover {
     border-color: transparent !important;
     box-shadow: 0 2px 4px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
+
 .page-btn {
     position: fixed;
     bottom: 30px;
     right: 30px;
+}
+
+pre {
+    margin-bottom: 0;
 }

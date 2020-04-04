@@ -1,0 +1,85 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ baseurl }}/static/css/main.css" rel="stylesheet">
+    <link href="{{ baseurl }}/static/css/twemoji-awesome.css" rel="stylesheet">
+    <link href="{{ baseurl }}/static/css/hljs-default.min.css" rel="stylesheet">
+    <title>This File</title>
+</head>
+<body>
+<div class="container">
+    <br><br>
+    <h2 style="color:#f4511e;"><b>PasteBin</b></h2>
+    <br>
+    <a href="{{ baseurl }}/" class="header-nav">Home</a>
+    <a href="{{ baseurl }}/all" class="header-nav">Pasted</a>
+    <a href="#" class="header-nav active">This</a>
+    <a href="{{ baseurl }}/about" class="header-nav">About</a>
+</div>
+<br><br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title"><i class="twa twa-bug"></i> This File</h4>
+            <p id='head-area' class="card-text">
+                <!-- filled by js -->
+            </p>
+            <a id="button-download" class="btn btn-light btn-sm" role="button" aria-pressed="true">Download</a>
+            <a id="button-raw" class="btn btn-light btn-sm" role="button" aria-pressed="true">Raw</a>
+        </div>
+        <div class="card-body" style="background-color: #f9f9f9; margin-left: -2px; margin-right: -2px;">
+            <pre class="paste" style="overflow-x:auto;"><code id="code-area"></code></pre>
+        </div>
+    </div>
+</div>
+<br>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">
+            <strong>Copyright </strong><a href="https://github.com/cczu-osa">CCZU OSA</a> © 2018
+        </span>
+    </div>
+</footer>
+<br>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script>
+    token = location.href.split('/').pop().split('#')[0].split('?')[0]
+    button_raw = $('#button-raw')
+    button_raw.prop('href', '{{ baseurl }}/raw/' + token)
+    button_download = $('#button-download')
+    button_download.prop('href', '{{ baseurl }}/raw/' + token)
+    button_download.prop('download', token + '.txt')
+
+    axios.get('{{ baseurl }}/paste/' + token).then(res => {
+        poster = res.data.poster || 'Anonymous'
+        language = res.data.language || 'plaintext'
+        paste_time = moment.unix(res.data.paste_time).format('YYYY/M/D H:m')
+        expire_time = moment.unix(res.data.expire_time).format('YYYY/M/D H:m')
+
+        head = `${poster} [${language}] : ${paste_time} ~ ${expire_time}`
+        $('#head-area').text(head)
+
+        $('#code-area').text(res.data.content)
+        document.getElementById("code-area").classList.add(language)
+
+        hljs.initHighlighting()
+        hljs.initLineNumbersOnLoad()
+    }).catch(error => {
+        location.replace('{{ baseurl }}/404')
+    })
+</script>
+</body>
+</html>
