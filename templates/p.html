@@ -6,7 +6,8 @@
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ baseurl }}/static/css/main.css" rel="stylesheet">
     <link href="{{ baseurl }}/static/css/twemoji-awesome.css" rel="stylesheet">
-    <link href="{{ baseurl }}/static/css/hljs-default.min.css" rel="stylesheet">
+    <link href="{{ baseurl }}/static/css/hljs-default.css" rel="stylesheet">
+    <link href="{{ baseurl }}/static/css/github-markdown.css" rel="stylesheet">
     <title>This File</title>
 </head>
 <body>
@@ -31,7 +32,9 @@
             <a id="button-raw" class="btn btn-light btn-sm" role="button" aria-pressed="true">Raw</a>
         </div>
         <div class="card-body" style="background-color: #f9f9f9; margin-left: -2px; margin-right: -2px;">
-            <pre class="paste" style="overflow-x:auto;"><code id="code-area"></code></pre>
+            <pre id="code-wrapper" class="paste" style="overflow-x:auto;display:none;"><code
+                    id="code-area"></code></pre>
+            <div id="show-area" class="markdown-body" style="display:none;"></div>
         </div>
     </div>
 </div>
@@ -48,13 +51,14 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
-<script src="https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js"></script>
-<script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
 <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
 <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdn.bootcss.com/marked/0.8.2/marked.min.js"></script>
+<script src="https://cdn.bootcss.com/dompurify/2.0.8/purify.min.js"></script>
 <script>
     token = location.href.split('/').pop().split('#')[0].split('?')[0]
     button_raw = $('#button-raw')
@@ -81,12 +85,19 @@
             head = `${poster} [${lang_name}] : ${paste_time} ~ ${expire_time}`
             $('#head-area').text(head)
 
-            $('#code-area').text(res.data.content)
-            if (lang !== '')
-                document.getElementById("code-area").classList.add(lang)
-
-            hljs.initHighlighting()
-            hljs.initLineNumbersOnLoad()
+            if (lang !== 'markdown') {
+                $('#code-area').text(res.data.content)
+                if (lang !== '')
+                    document.getElementById("code-area").classList.add(lang)
+                $('#code-wrapper').show()
+                hljs.initHighlighting()
+                hljs.initLineNumbersOnLoad()
+            } else {
+                preview = DOMPurify.sanitize(marked(res.data.content))
+                show_area = $('#show-area')
+                show_area.html(preview)
+                show_area.show()
+            }
         }).catch(error => {
             try {
                 if (error.response.status === 404)
@@ -96,8 +107,6 @@
             }
         })
     })
-
-
 </script>
 </body>
 </html>
