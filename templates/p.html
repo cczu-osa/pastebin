@@ -78,10 +78,11 @@
         hljs.initHighlighting()
         hljs.initLineNumbersOnLoad()
     }).catch(error => {
-        if (error.response.status === 404) {
-            location.replace('{{ baseurl }}/404')
-        } else {
-            console.log(error)
+        try {
+            if (error.response.status === 404)
+                location.replace('{{ baseurl }}/404')
+        } catch (error) {
+            console.error(error);
         }
     })
 </script>
