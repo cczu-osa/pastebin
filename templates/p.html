@@ -66,13 +66,19 @@
     axios.get('{{ baseurl }}/static/languages.json').then(res => {
         languages = res.data
         axios.get('{{ baseurl }}/paste/' + token).then(res => {
-            poster = res.data.poster || 'Anonymous'
             lang = res.data.language
-            if (languages[lang] === undefined) lang = ''
+            if (languages[lang] === undefined) {
+                lang_name = lang === '' ? '?' : `?(${lang})`
+                lang = ''
+            } else {
+                lang_name = languages[lang]
+            }
+
+            poster = res.data.poster || 'Anonymous'
             paste_time = moment.unix(res.data.paste_time).format('YYYY/M/D H:m')
             expire_time = moment.unix(res.data.expire_time).format('YYYY/M/D H:m')
 
-            head = `${poster} [${lang || '?'}] : ${paste_time} ~ ${expire_time}`
+            head = `${poster} [${lang_name}] : ${paste_time} ~ ${expire_time}`
             $('#head-area').text(head)
 
             $('#code-area').text(res.data.content)

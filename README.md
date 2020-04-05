@@ -2,7 +2,7 @@
 
 Language: [CN](doc/README_cn.md)
 
-An simple PasteBin Application with Python Flask backend and pretty frontend.
+A simple PasteBin Application with Python Flask backend and pretty frontend.
 
 Demo https://icpc.cczu.edu.cn/paste
 

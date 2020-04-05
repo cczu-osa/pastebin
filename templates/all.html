@@ -70,10 +70,16 @@
             axios.get('{{ baseurl }}/page/' + num).then(res => {
                 s = ''
                 for (i of res.data.items) {
+                    lang = i.language
+                    if (languages[lang] === undefined) {
+                        lang_name = lang === '' ? '?' : `?(${lang})`
+                        lang = ''
+                    } else {
+                        lang_name = languages[lang]
+                    }
+
                     link = `{{ baseurl }}/p/${i.token}`
                     poster = htmlEncode(i.poster) || 'Anonymous'
-                    lang = i.language
-                    if (languages[lang] === undefined) lang = ''
                     paste_time = moment.unix(i.paste_time).format('YYYY/M/D H:m')
                     content_trim = htmlEncode(i.content.split('\n', 5).join('\n'))
                     trimed = content_trim !== htmlEncode(i.content)
@@ -82,7 +88,7 @@
                     s += `<div class="card" style="overflow:auto">
                         <div class="card-header">
                             <a href="${link}">
-                                ${i.token} [${lang || '?'}] <small>by</small> ${poster} <small>at</small> ${paste_time}
+                                ${i.token} [${lang_name}] <small>by</small> ${poster} <small>at</small> ${paste_time}
                             </a>
                         </div>
                         <div class="card-body" style="background-color: #f9f9f9;">
