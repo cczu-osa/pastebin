@@ -57,18 +57,23 @@
     <script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
     <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
     <script>
+        function htmlEncode(value) {
+            return $('<div/>').text(value).html();
+        }
+
         num = location.href.split('/').pop().split('#')[0].split('?')[0]
         if (num === 'all') num = 1
         axios.get('{{ baseurl }}/page/' + num).then(res => {
             s = ''
             for (i of res.data.items) {
                 link = `{{ baseurl }}/p/${i.token}`
-                poster = i.poster || 'Anonymous'
-                language = i.language || 'plaintext'
+                poster = htmlEncode(i.poster) || 'Anonymous'
+                language = htmlEncode(i.language) || 'plaintext'
                 paste_time = moment.unix(i.paste_time).format('YYYY/M/D H:m')
-                content_trim = i.content.split('\n', 5).join('\n')
-                trimed = content_trim !== i.content
+                content_trim = htmlEncode(i.content.split('\n', 5).join('\n'))
+                trimed = content_trim !== htmlEncode(i.content)
                 more = trimed ? `\n<a href="${link}">...more</a>` : ''
+
                 s += `<div class="card" style="overflow:auto">
                         <div class="card-header">
                             <a href="${link}">
@@ -101,7 +106,11 @@
                 button_next.show()
             }
         }).catch(error => {
-            location.replace('{{ baseurl }}/404')
+            if (error.response.status === 404) {
+                location.replace('{{ baseurl }}/404')
+            } else {
+                console.log(error)
+            }
         })
     </script>
 </body>

@@ -8,7 +8,10 @@ from src.app import app
 
 class PasteApi(Resource):
     def get(self, token):
-        return service.get(token)
+        try:
+            return service.get(token)
+        except FileNotFoundError:
+            return None, 404
 
     def post(self):
         dic = request.get_json(force=True)
@@ -24,9 +27,12 @@ class PageApi(Resource):
 
 class RawApi(Resource):
     def get(self, token):
-        response = flask.make_response(service.get(token)['content'])
-        response.headers['content-type'] = 'text/plain; charset=utf-8'
-        return response
+        try:
+            response = flask.make_response(service.get(token)['content'])
+            response.headers['content-type'] = 'text/plain; charset=utf-8'
+            return response
+        except FileNotFoundError:
+            return None, 404
 
     def post(self):
         paste = Paste({
