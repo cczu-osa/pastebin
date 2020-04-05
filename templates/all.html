@@ -68,7 +68,7 @@
             for (i of res.data.items) {
                 link = `{{ baseurl }}/p/${i.token}`
                 poster = htmlEncode(i.poster) || 'Anonymous'
-                language = htmlEncode(i.language) || 'plaintext'
+                language = htmlEncode(i.language.replace(/\s+/g, '')) || 'plaintext'
                 paste_time = moment.unix(i.paste_time).format('YYYY/M/D H:m')
                 content_trim = htmlEncode(i.content.split('\n', 5).join('\n'))
                 trimed = content_trim !== htmlEncode(i.content)
@@ -81,7 +81,7 @@
                             </a>
                         </div>
                         <div class="card-body" style="background-color: #f9f9f9;">
-                            <pre class="paste" style="overflow:auto"><code class="${language}">${content_trim}</code>${more}</pre>
+                            <pre class="paste" style="overflow:auto"><code class="language-${language}">${content_trim}</code>${more}</pre>
                         </div>
                     </div>
                     <br>`

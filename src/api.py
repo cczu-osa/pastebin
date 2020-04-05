@@ -2,16 +2,13 @@ import flask
 from flask import request
 from flask_restful import Resource, Api
 
-from src.database import Paste, service
 from src.app import app
+from src.database import Paste, service
 
 
 class PasteApi(Resource):
     def get(self, token):
-        try:
-            return service.get(token)
-        except FileNotFoundError:
-            return None, 404
+        return service.get(token)
 
     def post(self):
         dic = request.get_json(force=True)
@@ -27,12 +24,9 @@ class PageApi(Resource):
 
 class RawApi(Resource):
     def get(self, token):
-        try:
-            response = flask.make_response(service.get(token)['content'])
-            response.headers['content-type'] = 'text/plain; charset=utf-8'
-            return response
-        except FileNotFoundError:
-            return None, 404
+        response = flask.make_response(service.get(token)['content'])
+        response.headers['content-type'] = 'text/plain; charset=utf-8'
+        return response
 
     def post(self):
         paste = Paste({

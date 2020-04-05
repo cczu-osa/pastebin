@@ -65,7 +65,7 @@
 
     axios.get('{{ baseurl }}/paste/' + token).then(res => {
         poster = res.data.poster || 'Anonymous'
-        language = res.data.language || 'plaintext'
+        language = res.data.language.replace(/\s+/g, '') || 'plaintext'
         paste_time = moment.unix(res.data.paste_time).format('YYYY/M/D H:m')
         expire_time = moment.unix(res.data.expire_time).format('YYYY/M/D H:m')
 
@@ -73,7 +73,7 @@
         $('#head-area').text(head)
 
         $('#code-area').text(res.data.content)
-        document.getElementById("code-area").classList.add(language)
+        document.getElementById("code-area").classList.add('language-' + language)
 
         hljs.initHighlighting()
         hljs.initLineNumbersOnLoad()

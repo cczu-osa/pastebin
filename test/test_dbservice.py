@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 
 from sqlalchemy.exc import IntegrityError
+from werkzeug.exceptions import NotFound
 
 from src.database import Paste, page_limit, service, token_generate
 
@@ -36,7 +37,7 @@ class TestDBService(unittest.TestCase):
         self.assertGreaterEqual(len(check['token']), 6)
         self.dict_compare_common(check, paste._toDict())
         time.sleep(0.5)
-        self.assertRaises(AttributeError, service.get, token)
+        self.assertRaises(NotFound, service.get, token)
 
     @patch('src.database.token_generate')
     def test_duplicate_token(self, mock_token_generate):
@@ -121,3 +122,7 @@ class TestDBService(unittest.TestCase):
         service.trim()
         check = service.get(token)
         self.assertEqual(check['content'], dic['content'])
+
+    def test_page_outofrange(self):
+        self.assertRaises(NotFound, service.page, 0)
+        self.assertRaises(NotFound, service.page, 900)

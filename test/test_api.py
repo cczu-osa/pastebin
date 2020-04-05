@@ -66,3 +66,9 @@ class TestApi(unittest.TestCase):
         token = ret_post.get_data().decode()
         ip = service._get_obj(token).ip
         self.assertEqual(ip, '9.9.9.9')
+
+    def test_404(self):
+        self.assertEqual(self.client.get('/paste/' + '000000000000000000000000000000000').status_code, 404)
+        self.assertEqual(self.client.get('/raw/' + '000000000000000000000000000000000').status_code, 404)
+        self.assertEqual(self.client.get('/page/0').status_code, 404)
+        self.assertEqual(self.client.get('/page/900').status_code, 404)

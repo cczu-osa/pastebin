@@ -4,6 +4,7 @@ import random
 import string
 
 from flask_sqlalchemy import SQLAlchemy, Pagination
+from werkzeug.exceptions import NotFound
 
 from src.app import app
 
@@ -88,7 +89,7 @@ class Service:
     def get(self, token):
         paste = Paste.query.filter(Paste.token == token, datetime.datetime.now() < Paste.expire_time).first()
         if paste is None:
-            raise FileNotFoundError
+            raise NotFound
         return paste.outputDict()
 
     def _get_obj(self, token):
