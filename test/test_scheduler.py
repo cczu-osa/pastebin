@@ -6,7 +6,7 @@ from src.database import service
 
 
 class TestScheduler(unittest.TestCase):
-    def test(self):
+    def test_tasks(self):
         self.assertTrue(scheduler.running)
         oldcnt = service._trim_count
         job = scheduler.get_jobs()[0]
