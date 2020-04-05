@@ -10,6 +10,10 @@ Demo https://icpc.cczu.edu.cn/paste
 
 ## Features
 
+### Markdown preview
+
+When pasting is Markdown, the page is automatically rendered.
+
 ### Automatic code format recognition
 
 If you leave language selection empty, it will try to recognize code syntax automatically.

@@ -8,6 +8,10 @@ Demo https://icpc.cczu.edu.cn/paste
 
 ## Features
 
+### Markdown 渲染
+
+当粘贴的是 Markdown 格式时，自动渲染页面。
+
 ### 代码格式自动识别
 
 你可以留空代码格式选项，它会尝试自动识别（不一定准）。——Powered by highlight.js
