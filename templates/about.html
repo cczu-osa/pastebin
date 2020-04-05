@@ -55,7 +55,7 @@
     axios.get('{{ baseurl }}/static/languages.json').then(res => {
         s = ''
         for (i in res.data) {
-            s += '<li>' + i + '</li>'
+            s += '<li>' + res.data[i] + '</li>'
         }
         $('#languages-list').html(s)
         $('#building').show()

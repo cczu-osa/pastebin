@@ -63,55 +63,61 @@
 
         num = location.href.split('/').pop().split('#')[0].split('?')[0]
         if (num === 'all') num = 1
-        axios.get('{{ baseurl }}/page/' + num).then(res => {
-            s = ''
-            for (i of res.data.items) {
-                link = `{{ baseurl }}/p/${i.token}`
-                poster = htmlEncode(i.poster) || 'Anonymous'
-                language = htmlEncode(i.language.replace(/\s+/g, '')) || 'plaintext'
-                paste_time = moment.unix(i.paste_time).format('YYYY/M/D H:m')
-                content_trim = htmlEncode(i.content.split('\n', 5).join('\n'))
-                trimed = content_trim !== htmlEncode(i.content)
-                more = trimed ? `\n<a href="${link}">...more</a>` : ''
 
-                s += `<div class="card" style="overflow:auto">
+        axios.get('{{ baseurl }}/static/languages.json').then(res => {
+            languages = res.data
+
+            axios.get('{{ baseurl }}/page/' + num).then(res => {
+                s = ''
+                for (i of res.data.items) {
+                    link = `{{ baseurl }}/p/${i.token}`
+                    poster = htmlEncode(i.poster) || 'Anonymous'
+                    lang = i.language
+                    if (languages[lang] === undefined) lang = ''
+                    paste_time = moment.unix(i.paste_time).format('YYYY/M/D H:m')
+                    content_trim = htmlEncode(i.content.split('\n', 5).join('\n'))
+                    trimed = content_trim !== htmlEncode(i.content)
+                    more = trimed ? `\n<a href="${link}">...more</a>` : ''
+
+                    s += `<div class="card" style="overflow:auto">
                         <div class="card-header">
                             <a href="${link}">
-                                ${i.token} [${language}] <small>by</small> ${poster} <small>at</small> ${paste_time}
+                                ${i.token} [${lang || '?'}] <small>by</small> ${poster} <small>at</small> ${paste_time}
                             </a>
                         </div>
                         <div class="card-body" style="background-color: #f9f9f9;">
-                            <pre class="paste" style="overflow:auto"><code class="language-${language}">${content_trim}</code>${more}</pre>
+                            <pre class="paste" style="overflow:auto"><code class="${lang}">${content_trim}</code>${more}</pre>
                         </div>
                     </div>
                     <br>`
-            }
-            $('#show-area').html(s)
+                }
+                $('#show-area').html(s)
 
-            hljs.initHighlighting()
-            hljs.initLineNumbersOnLoad()
+                hljs.initHighlighting()
+                hljs.initLineNumbersOnLoad()
 
-            current = res.data.pagination.current
-            sum = res.data.pagination.sum
+                current = res.data.pagination.current
+                sum = res.data.pagination.sum
 
-            button_prev = $('#button-prev')
-            if (current !== 1) {
-                button_prev.prop('href', `{{ baseurl }}/all/${current - 1}`)
-                button_prev.show()
-            }
+                button_prev = $('#button-prev')
+                if (current !== 1) {
+                    button_prev.prop('href', `{{ baseurl }}/all/${current - 1}`)
+                    button_prev.show()
+                }
 
-            button_next = $('#button-next')
-            if (current !== sum) {
-                button_next.prop('href', `{{ baseurl }}/all/${current + 1}`)
-                button_next.show()
-            }
-        }).catch(error => {
-            try {
-                if (error.response.status === 404)
-                    location.replace('{{ baseurl }}/404')
-            } catch (error) {
-                console.error(error);
-            }
+                button_next = $('#button-next')
+                if (current !== sum) {
+                    button_next.prop('href', `{{ baseurl }}/all/${current + 1}`)
+                    button_next.show()
+                }
+            }).catch(error => {
+                try {
+                    if (error.response.status === 404)
+                        location.replace('{{ baseurl }}/404')
+                } catch (error) {
+                    console.error(error);
+                }
+            })
         })
     </script>
 </body>

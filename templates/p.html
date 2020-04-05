@@ -63,28 +63,35 @@
     button_download.prop('href', '{{ baseurl }}/raw/' + token)
     button_download.prop('download', token + '.txt')
 
-    axios.get('{{ baseurl }}/paste/' + token).then(res => {
-        poster = res.data.poster || 'Anonymous'
-        language = res.data.language.replace(/\s+/g, '') || 'plaintext'
-        paste_time = moment.unix(res.data.paste_time).format('YYYY/M/D H:m')
-        expire_time = moment.unix(res.data.expire_time).format('YYYY/M/D H:m')
+    axios.get('{{ baseurl }}/static/languages.json').then(res => {
+        languages = res.data
+        axios.get('{{ baseurl }}/paste/' + token).then(res => {
+            poster = res.data.poster || 'Anonymous'
+            lang = res.data.language
+            if (languages[lang] === undefined) lang = ''
+            paste_time = moment.unix(res.data.paste_time).format('YYYY/M/D H:m')
+            expire_time = moment.unix(res.data.expire_time).format('YYYY/M/D H:m')
 
-        head = `${poster} [${language}] : ${paste_time} ~ ${expire_time}`
-        $('#head-area').text(head)
+            head = `${poster} [${lang || '?'}] : ${paste_time} ~ ${expire_time}`
+            $('#head-area').text(head)
 
-        $('#code-area').text(res.data.content)
-        document.getElementById("code-area").classList.add('language-' + language)
+            $('#code-area').text(res.data.content)
+            if (lang !== '')
+                document.getElementById("code-area").classList.add(lang)
 
-        hljs.initHighlighting()
-        hljs.initLineNumbersOnLoad()
-    }).catch(error => {
-        try {
-            if (error.response.status === 404)
-                location.replace('{{ baseurl }}/404')
-        } catch (error) {
-            console.error(error);
-        }
+            hljs.initHighlighting()
+            hljs.initLineNumbersOnLoad()
+        }).catch(error => {
+            try {
+                if (error.response.status === 404)
+                    location.replace('{{ baseurl }}/404')
+            } catch (error) {
+                console.error(error);
+            }
+        })
     })
+
+
 </script>
 </body>
 </html>

@@ -19,7 +19,6 @@
     <br>
     <a href="{{ baseurl }}/" class="header-nav active">Home</a>
     <a href="{{ baseurl }}/all" class="header-nav">Pasted</a>
-    {#            <a href="{{ baseurl }}/post" class="header-nav">PostBin</a>#}
     <a href="{{ baseurl }}/about" class="header-nav">About</a>
 </div>
 <br><br>
@@ -120,7 +119,7 @@
         data = res.data
         s = ''
         for (i in data) {
-            s += `<option value="${data[i]}">${i}</option>`
+            s += `<option value="${i}">${data[i]}</option>`
         }
         $('#id_language').html(s)
 
